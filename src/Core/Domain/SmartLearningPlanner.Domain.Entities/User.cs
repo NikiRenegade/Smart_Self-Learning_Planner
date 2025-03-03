@@ -19,9 +19,6 @@ public class User
     /// </summary>
     public string Email { get; set; }
 
-    
-    
-    
     /// <summary>
     /// Фото профиля (если есть).
     /// </summary>

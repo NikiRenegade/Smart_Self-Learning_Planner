@@ -20,7 +20,7 @@ public class QuizQuestion
     /// <summary>
     /// Варианты ответа (если применимо).
     /// </summary>
-    public List<AnswerOption>? Options { get; set; }
+    public List<AnswerOption> Options { get; set; }
 
     /// <summary>
     /// Правильный ответ (если это текстовый вопрос).
