@@ -3,7 +3,7 @@ namespace SmartLearningPlanner.Domain.Entities;
 /// <summary>
 /// Отдельная задача в рамках Roadmap.
 /// </summary>
-public class Task
+public class Mission
 {
     public int Id { get; set; }
 
