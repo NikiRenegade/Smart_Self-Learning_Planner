@@ -1,14 +1,18 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
     <PropertyGroup>
-        <TargetFramework>net9.0</TargetFramework>
+        <TargetFramework>net8.0</TargetFramework>
         <ImplicitUsings>enable</ImplicitUsings>
         <Nullable>enable</Nullable>
     </PropertyGroup>
 
     <ItemGroup>
-      <ProjectReference Include="..\SmartLearningPlanner.Domain.Interfaces\SmartLearningPlanner.Domain.Interfaces.csproj" />
-      <ProjectReference Include="..\src\Core\Domain\SmartLearningPlanner.Domain.Entities\SmartLearningPlanner.Domain.Entities.csproj" />
+      <ProjectReference Include="..\SmartLearningPlanner.Domain.Interfaces\SmartLearningPlanner.Domain.Interfaces.csproj">
+        <ReferenceSourceTarget></ReferenceSourceTarget>
+      </ProjectReference>
+      <ProjectReference Include="..\src\Core\Domain\SmartLearningPlanner.Domain.Entities\SmartLearningPlanner.Domain.Entities.csproj">
+        <ReferenceSourceTarget></ReferenceSourceTarget>
+      </ProjectReference>
     </ItemGroup>
 
 </Project>
