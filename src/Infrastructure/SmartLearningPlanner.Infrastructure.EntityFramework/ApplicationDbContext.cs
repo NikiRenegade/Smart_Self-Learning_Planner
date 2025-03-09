@@ -10,11 +10,11 @@ public class ApplicationDbContext: DbContext
 {
    
     
-    // public DbSet<AnswerOption> AnswerOptions => Set<AnswerOption>();
-    // public DbSet<Quiz> Quizs => Set<Quiz>();
-    // public DbSet<QuizQuestion> QuizQuestions => Set<QuizQuestion>();
-    // public DbSet<Roadmap> Roadmaps => Set<Roadmap>();
-    // public DbSet<Task> Tasks => Set<Task>();
+    public DbSet<AnswerOption> AnswerOptions => Set<AnswerOption>();
+    public DbSet<Quiz> Quizs => Set<Quiz>();
+    public DbSet<QuizQuestion> QuizQuestions => Set<QuizQuestion>();
+    public DbSet<Roadmap> Roadmaps => Set<Roadmap>();
+    public DbSet<Mission> Tasks => Set<Mission>();
     public DbSet<Tag> Tags => Set<Tag>();
     public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : base(options)
     {
