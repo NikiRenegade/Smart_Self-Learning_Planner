@@ -33,7 +33,7 @@ public class Roadmap
     /// <summary>
     /// Список задач, связанных с данной Roadmap.
     /// </summary>
-    public List<Task> Tasks { get; set; } = new();
+    public List<Mission> Missions { get; set; } = new();
 
     /// <summary>
     /// Квизы, связанные с данной Roadmap.
@@ -43,7 +43,8 @@ public class Roadmap
     /// <summary>
     /// Вложенные Roadmap (если есть), представляющие шаги текущей Roadmap.
     /// </summary>
-    public List<Step> SubRoadmaps { get; set; } = new();
+    public List<Roadmap> SubRoadmaps { get; set; } = new();
+    public int? ParentRoadmapId;
 
     /// <summary>
     /// Теги для категоризации Roadmap.
