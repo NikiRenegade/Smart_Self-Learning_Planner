@@ -4,9 +4,9 @@ using SmartLearningPlanner.Domain.Entities;
 
 namespace SmartLearningPlanner.Infrastructure.EntityFramework.Configurations;
 
-public class UserConfiguration : IEntityTypeConfiguration<User>
+public class UserConfiguration : IEntityTypeConfiguration<ApplicationUser>
 {
-    public void Configure(EntityTypeBuilder<User> builder) 
+    public void Configure(EntityTypeBuilder<ApplicationUser> builder) 
 		{
 
         // Указываем таблицу, в которой будет храниться сущность
@@ -15,15 +15,16 @@ public class UserConfiguration : IEntityTypeConfiguration<User>
         // Указываем первичный ключ
         builder.HasKey(u => u.Id);
 
-				builder.Property(u => u.Name)
+				builder.Property(u => u.FirstName)
 						.IsRequired()
 						.HasMaxLength(64);
+
+				builder.Property(u => u.FirstName)
+										.IsRequired()
+										.HasMaxLength(64);
 
 				builder.Property(u => u.Email)
 						.IsRequired()
-						.HasMaxLength(64);
-
-				builder.Property(u => u.ProfilePictureUrl)
-						.HasMaxLength(2048);
+						.HasMaxLength(64);		
     }
 }
