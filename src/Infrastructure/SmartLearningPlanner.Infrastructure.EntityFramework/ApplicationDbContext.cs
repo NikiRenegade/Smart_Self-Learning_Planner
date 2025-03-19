@@ -14,7 +14,7 @@ public class ApplicationDbContext: IdentityDbContext<ApplicationUser>
      public DbSet<Quiz> Quizs => Set<Quiz>();
      public DbSet<QuizQuestion> QuizQuestions => Set<QuizQuestion>();
      public DbSet<Roadmap> Roadmaps => Set<Roadmap>();
-     public DbSet<Task> Tasks => Set<Task>();
+     public DbSet<Mission> Tasks => Set<Mission>();
      public DbSet<ApplicationUser> ApplicationUsers => Set<ApplicationUser>();
     
     public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : base(options)
