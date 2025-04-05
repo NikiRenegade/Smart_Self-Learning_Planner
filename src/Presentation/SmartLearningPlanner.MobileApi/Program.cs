@@ -1,4 +1,5 @@
 using Microsoft.EntityFrameworkCore;
+using SmartLearningPlanner.Domain.Entities;
 using SmartLearningPlanner.Application.Interfaces;
 using SmartLearningPlanner.Application.Services;
 using SmartLearningPlanner.Domain.Interfaces.Repositories;
@@ -19,6 +20,8 @@ builder.Services.AddSwaggerGen();
 
 builder.Services.AddScoped<ITagRepository, TagRepository>();
 builder.Services.AddScoped<ITagService, TagService>();
+builder.Services.AddScoped<IUserRepository, UserRepository>();
+builder.Services.AddScoped<IUserService, UserService>();
 
 // Регистрация ApplicationDbContext
 builder.Services.AddDbContext<ApplicationDbContext>(options =>

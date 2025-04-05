@@ -1,6 +1,6 @@
 using System;
 using Microsoft.AspNetCore.Identity;
-namespace SmartLearningPlanner.Infrastructure.EntityFramework;
+namespace SmartLearningPlanner.Domain.Entities;
 
 public class ApplicationUser : IdentityUser
     {
