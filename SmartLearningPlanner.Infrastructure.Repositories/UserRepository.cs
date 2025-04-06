@@ -6,7 +6,7 @@ using SmartLearningPlanner.Infrastructure.EntityFramework;
 
 namespace SmartLearningPlanner.Infrastructure.Repositories;
 
-public class UserRepository: IUserRepository
+public class UserRepository : IUserRepository
 {
     private readonly ApplicationDbContext _context;
     private readonly UserManager<ApplicationUser> _userManager;
@@ -27,13 +27,14 @@ public class UserRepository: IUserRepository
         return await _context.Users.ToListAsync();
     }
 
-    public async Task AddAsync(ApplicationUser user, string password)
+    public async Task<string> AddAsync(ApplicationUser user, string password)
     {
         var result = await _userManager.CreateAsync(user, password);
         if (!result.Succeeded)
         {
             throw new Exception($"Failed to create user: {string.Join(", ", result.Errors.Select(e => e.Description))}");
         }
+        return await _userManager.GenerateEmailConfirmationTokenAsync(user);
     }
 
     public async Task UpdateAsync(ApplicationUser user)
@@ -63,5 +64,16 @@ public class UserRepository: IUserRepository
         {
             throw new Exception($"Failed to change password: {string.Join(", ", result.Errors.Select(e => e.Description))}");
         }
+    }
+    public async Task ConfirmEmailAsync(string id, string token)
+    {
+        var user = await _userManager.FindByIdAsync(id);
+        if (user != null)
+        {
+            var result = await _userManager.ConfirmEmailAsync(user, token);
+            if (!result.Succeeded)
+                 throw new Exception($"Email confirmation failed: {string.Join(", ", result.Errors.Select(e => e.Description))}");
+        }
+
     }
 }

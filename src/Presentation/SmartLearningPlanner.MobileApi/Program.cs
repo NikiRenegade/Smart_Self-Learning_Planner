@@ -2,6 +2,7 @@ using Microsoft.EntityFrameworkCore;
 using SmartLearningPlanner.Domain.Entities;
 using SmartLearningPlanner.Application.Interfaces;
 using SmartLearningPlanner.Application.Services;
+using SmartLearningPlanner.Application.Setting;
 using SmartLearningPlanner.Domain.Interfaces.Repositories;
 using SmartLearningPlanner.Infrastructure.EntityFramework;
 using SmartLearningPlanner.Infrastructure.Repositories;
@@ -30,6 +31,10 @@ builder.Services.AddDbContext<ApplicationDbContext>(options =>
 builder.Services.AddIdentity<ApplicationUser, IdentityRole>()
     .AddEntityFrameworkStores<ApplicationDbContext>()
     .AddDefaultTokenProviders();
+
+builder.Services.Configure<EmailSettings>(builder.Configuration.GetSection("EmailSettings"));
+builder.Services.AddTransient<IEmailSender, EmailSender>();
+
 
 // Настройка CORS
 builder.Services.AddCors(options =>
