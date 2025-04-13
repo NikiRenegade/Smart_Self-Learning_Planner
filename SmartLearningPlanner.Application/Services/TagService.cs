@@ -18,14 +18,14 @@ public class TagService : ITagService
     public async Task<TagDto> GetTagByIdAsync(int id)
     {
         var tag = await _tagRepository.GetByIdAsync(id);
-        
+
         return new TagDto { Id = tag.Id, Name = tag.Name, Code = tag.Code };
     }
 
     public async Task<IEnumerable<TagDto>> GetAllTagsAsync()
     {
         var tags = await _tagRepository.GetAllAsync();
-        
+
         return tags.Select(t => new TagDto { Id = t.Id, Name = t.Name, Code = t.Code });
     }
 

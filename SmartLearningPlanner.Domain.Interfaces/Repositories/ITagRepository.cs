@@ -1,5 +1,4 @@
 ﻿using SmartLearningPlanner.Domain.Entities;
-using Task = System.Threading.Tasks.Task;
 
 namespace SmartLearningPlanner.Domain.Interfaces.Repositories;
 

@@ -50,4 +50,9 @@ public class Roadmap
     /// Теги для категоризации Roadmap.
     /// </summary>
     public List<Tag> Tags { get; set; } = new();
+
+    /// <summary>
+    /// id создателя Roadmap.
+    /// </summary>
+    public string UserId {get; set;}
 }
