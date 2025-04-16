@@ -7,7 +7,10 @@ using SmartLearningPlanner.Domain.Interfaces.Repositories;
 using SmartLearningPlanner.Infrastructure.EntityFramework;
 using SmartLearningPlanner.Infrastructure.Repositories;
 using Microsoft.AspNetCore.Identity;
+using Minio;
+
 var builder = WebApplication.CreateBuilder(args);
+var appConf = builder.Configuration;
 
 // Add services to the container.
 builder.Services.AddControllers();
@@ -23,18 +26,24 @@ builder.Services.AddScoped<ITagRepository, TagRepository>();
 builder.Services.AddScoped<ITagService, TagService>();
 builder.Services.AddScoped<IUserRepository, UserRepository>();
 builder.Services.AddScoped<IUserService, UserService>();
+builder.Services.AddScoped<IS3Service, S3MinioService>();
 
 // Регистрация ApplicationDbContext
 builder.Services.AddDbContext<ApplicationDbContext>(options =>
-    options.UseNpgsql(builder.Configuration.GetConnectionString("DefaultConnection")));
+    options.UseNpgsql(appConf.GetConnectionString("DefaultConnection")));
 
 builder.Services.AddIdentity<ApplicationUser, IdentityRole>()
     .AddEntityFrameworkStores<ApplicationDbContext>()
     .AddDefaultTokenProviders();
 
-builder.Services.Configure<EmailSettings>(builder.Configuration.GetSection("EmailSettings"));
+builder.Services.Configure<EmailSettings>(appConf.GetSection("EmailSettings"));
 builder.Services.AddTransient<IEmailSender, EmailSender>();
 
+builder.Services.AddMinio(configureClient => configureClient
+            .WithEndpoint(appConf.GetSection("MinioSettings:MinioServerUrl").Value)
+            .WithCredentials(   appConf.GetSection("MinioSettings:Username").Value, 
+                                appConf.GetSection("MinioSettings:Password").Value)
+        .Build());
 
 // Настройка CORS
 builder.Services.AddCors(options =>
