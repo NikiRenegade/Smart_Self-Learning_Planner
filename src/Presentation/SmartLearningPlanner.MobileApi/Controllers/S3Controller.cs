@@ -27,5 +27,8 @@ namespace SmartLearningPlanner.MobileApi.Controllers
         {
             return await _s3Service.CreateBucketAsync(bucketName);
         }
+
+        #region NOT READY
+        #endregion
     }
 }

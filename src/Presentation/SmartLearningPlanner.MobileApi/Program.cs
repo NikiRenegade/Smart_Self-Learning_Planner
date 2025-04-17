@@ -41,9 +41,9 @@ builder.Services.AddTransient<IEmailSender, EmailSender>();
 
 builder.Services.AddMinio(configureClient => configureClient
             .WithEndpoint(appConf.GetSection("MinioSettings:MinioServerUrl").Value)
-            .WithCredentials(   appConf.GetSection("MinioSettings:Username").Value, 
-                                appConf.GetSection("MinioSettings:Password").Value)
-        .Build());
+            .WithCredentials(appConf.GetSection("MinioSettings:Username").Value, appConf.GetSection("MinioSettings:Password").Value)
+            .WithSSL(false)
+            .Build());
 
 // Настройка CORS
 builder.Services.AddCors(options =>

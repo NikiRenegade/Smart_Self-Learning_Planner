@@ -22,16 +22,18 @@ namespace SmartLearningPlanner.Application.Services
 
         public async Task<bool> CreateBucketAsync(string bucketName)
         {
+            bool ret = true;
+
             try
             {
                 await _minioClient.MakeBucketAsync(new MakeBucketArgs().WithBucket(bucketName));
             }
             catch (Exception)
             {
-                return await Task.FromResult(false);
+                ret = false;
             }
 
-            return await Task.FromResult(true);
+            return await Task.FromResult(ret);
         }
 
         public async Task<ListAllMyBucketsResult> GetBucketListAsync()
