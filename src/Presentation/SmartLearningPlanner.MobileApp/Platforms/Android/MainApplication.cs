@@ -3,7 +3,12 @@ using Android.Runtime;
 
 namespace SmartLearningPlanner.MobileApp;
 
+#if DEBUG
+[Application(UsesCleartextTraffic = true)]
+#else
 [Application]
+#endif
+
 public class MainApplication : MauiApplication
 {
 	public MainApplication(IntPtr handle, JniHandleOwnership ownership)

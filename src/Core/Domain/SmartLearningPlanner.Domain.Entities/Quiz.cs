@@ -21,4 +21,10 @@ public class Quiz
     /// Вопросы, входящие в этот квиз.
     /// </summary>
     public List<QuizQuestion> Questions { get; set; } = new();
+
+    /// <summary>
+    /// Идентификатор узла (MindmapNode), к которому относится прогресс.
+    /// </summary>
+    public int MindmapNodeId { get; set; }
+    public MindmapNode MindmapNode { get; set; } = null!;
 }

@@ -20,9 +20,12 @@ builder.Services.AddSwaggerGen();
 //builder.Services.AddOpenApi();
 
 builder.Services.AddScoped<ITagRepository, TagRepository>();
-builder.Services.AddScoped<ITagService, TagService>();
 builder.Services.AddScoped<IUserRepository, UserRepository>();
+builder.Services.AddScoped<IRoadmapRepository, RoadmapRepository>();
+
+builder.Services.AddScoped<ITagService, TagService>();
 builder.Services.AddScoped<IUserService, UserService>();
+builder.Services.AddScoped<IRoadmapService, RoadmapService>();
 
 // Регистрация ApplicationDbContext
 builder.Services.AddDbContext<ApplicationDbContext>(options =>
@@ -59,7 +62,11 @@ if (app.Environment.IsDevelopment())
 
 app.UseAuthentication(); 
 app.UseAuthorization();
-app.UseHttpsRedirection();
+
+#if !DEBUG
+//app.UseHttpsRedirection();
+#else
+#endif
 
 app.UseAuthorization();
 

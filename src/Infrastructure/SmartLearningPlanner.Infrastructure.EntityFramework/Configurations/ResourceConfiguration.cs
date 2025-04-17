@@ -24,10 +24,12 @@ public class ResourceConfiguration : IEntityTypeConfiguration<Resource>
 						.HasMaxLength(1024); // Максимальная длина
         builder.Property(r => r.LocalPath)
 						.HasMaxLength(1024); // Максимальная длина
-						
+		
+        /*
 				// Установка связей		
-        builder.HasOne<Roadmap>().WithMany(r => r.Resources)
-						.HasForeignKey("RoadmapId")
-						.OnDelete(DeleteBehavior.Cascade);
+        builder.HasOne<MindmapNode>().WithMany(r => r.Resources)
+                        .HasForeignKey(m => m.MindmapNodeId)
+                        .OnDelete(DeleteBehavior.Cascade);
+        */
     }
 }

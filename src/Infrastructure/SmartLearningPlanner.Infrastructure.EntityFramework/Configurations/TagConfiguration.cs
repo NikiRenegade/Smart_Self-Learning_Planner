@@ -21,10 +21,5 @@ public class TagConfiguration : IEntityTypeConfiguration<Tag>
 
         builder.Property(t => t.Code)
             .HasMaxLength(128); // Максимальная длина
-
-        // Установка связей	
-        builder.HasOne<Roadmap>().WithMany(r => r.Tags)
-			.HasForeignKey("RoadmapId")
-			.OnDelete(DeleteBehavior.Cascade);
     }
 }

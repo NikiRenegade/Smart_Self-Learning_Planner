@@ -26,6 +26,12 @@ public class Resource
     /// Локальный путь к файлу, если ресурс хранится на устройстве.
     /// </summary>
     public string? LocalPath { get; set; }
+
+    /// <summary>
+    /// Идентификатор узла (MindmapNode), к которому относится прогресс.
+    /// </summary>
+    public int MindmapNodeId { get; set; }
+    public MindmapNode MindmapNode { get; set; } = null!;
 }
 
 /// <summary>

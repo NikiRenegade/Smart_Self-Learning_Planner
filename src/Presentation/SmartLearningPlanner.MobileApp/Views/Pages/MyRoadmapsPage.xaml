@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="SmartLearningPlanner.MobileApp.Views.Pages.MyRoadmapsPage"
+             xmlns:viewModels="clr-namespace:SmartLearningPlanner.MobileApp.ViewModels"
+             Title="Мои карты"
+             BackgroundColor="White">
+
+    <VerticalStackLayout Padding="20" Spacing="16">
+
+        <!-- Заголовок -->
+        <Label Text="Мои карты"
+               FontSize="28"
+               FontAttributes="Bold"
+               TextColor="Black" />
+
+        <!-- Поиск -->
+        <SearchBar Placeholder="Поиск"
+                   x:Name="SearchBar"
+                   Text="{Binding SearchQuery}"
+                   SearchCommand="{Binding SearchCommand}"
+                   BackgroundColor="#F1F1F1"
+                   CancelButtonColor="#4C8EFF"
+                   HeightRequest="40" />
+
+        <!-- Кнопка создания -->
+        <Button Text="Создать новую карту"
+                Style="{StaticResource PrimaryButtonStyle}"
+                Clicked="OnCreateRoadmapClicked" />
+
+        <!-- Список карт -->
+        <CollectionView ItemsSource="{Binding Roadmaps}"
+                        SelectionMode="None"
+                        VerticalOptions="FillAndExpand">
+
+            <CollectionView.ItemTemplate>
+                <DataTemplate>
+                    <Frame CornerRadius="12"
+                           Padding="12"
+                           Margin="0,6"
+                           BackgroundColor="White"
+                           HasShadow="True"
+                           BorderColor="#E1E1E1">
+                        <Frame.GestureRecognizers>
+                            <TapGestureRecognizer Tapped="OnRoadmapTapped"
+                                          CommandParameter="{Binding Id}" />
+                        </Frame.GestureRecognizers>
+
+                        <HorizontalStackLayout Spacing="12">
+                            <!-- Иконка -->
+                            <Frame WidthRequest="40"
+                                   HeightRequest="40"
+                                   CornerRadius="20"
+                                   BackgroundColor="{Binding Color}"
+                                   Padding="0"
+                                   VerticalOptions="Center">
+                                <Image Source="mindmap_icon.png"
+                                       WidthRequest="24"
+                                       HeightRequest="24"
+                                       HorizontalOptions="Center"
+                                       VerticalOptions="Center" />
+                            </Frame>
+
+                            <!-- Текст -->
+                            <VerticalStackLayout>
+                                <Label Text="{Binding Title}"
+                                       FontAttributes="Bold"
+                                       FontSize="16"
+                                       TextColor="Black" />
+                                <Label Text="{Binding ShortDescription}"
+                                       FontSize="13"
+                                       TextColor="#888" />
+                            </VerticalStackLayout>
+                        </HorizontalStackLayout>
+                    </Frame>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
+    </VerticalStackLayout>
+</ContentPage>

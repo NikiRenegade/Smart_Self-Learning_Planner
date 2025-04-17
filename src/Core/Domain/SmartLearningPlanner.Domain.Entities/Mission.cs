@@ -21,7 +21,13 @@ public class Mission
     /// Флаг, выполнена ли задача.
     /// </summary>
     public bool IsCompleted { get; set; }
-    
+
+    /// <summary>
+    /// Идентификатор узла (MindmapNode), к которому относится прогресс.
+    /// </summary>
+    public int MindmapNodeId { get; set; }
+    public MindmapNode MindmapNode { get; set; } = null!;
+
     // порядок DragAndDrop
     // привязка к тесту
     // дата начала
