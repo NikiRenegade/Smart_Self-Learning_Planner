@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="SmartLearningPlanner.MobileApp.Views.Pages.CreateRoadmapPage"
+             Title="CreateRoadmapPage">
+    <ScrollView>
+        <VerticalStackLayout Padding="20" Spacing="15">
+            <!-- Roadmap Title -->
+            <Label Text="Roadmap Title" FontAttributes="Bold"/>
+            <Entry Text="{Binding Title}" Placeholder="Enter roadmap title"/>
+
+            <!-- Roadmap ShortDescription -->
+            <Label Text="Roadmap short description" FontAttributes="Bold"/>
+            <Entry Text="{Binding ShortDescription}" Placeholder="Enter roadmap short description"/>
+            
+            <!-- Roadmap Notes -->
+            <Label Text="Roadmap Notes" FontAttributes="Bold"/>
+            <Entry Text="{Binding Notes}" Placeholder="Enter roadmap notes"/>
+
+            <!-- Add Nodes -->
+            <Label Text="Add Nodes" FontAttributes="Bold" Margin="0,20,0,0"/>
+            <Entry Text="{Binding CurrentNodeTitle}" 
+                   Placeholder="Enter node title"
+                   ReturnCommand="{Binding AddRootNodeCommand}"/>
+
+            <Button Text="Add Root Node" 
+                    Command="{Binding AddRootNodeCommand}"
+                    HorizontalOptions="Start"/>
+
+            <!-- Nodes List -->
+            <CollectionView ItemsSource="{Binding Nodes}" Margin="0,20,0,0">
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+                        <VerticalStackLayout>
+                            <Label Text="{Binding Title}" FontAttributes="Bold"/>
+
+                            <!-- Child Nodes -->
+                            <CollectionView ItemsSource="{Binding Children}" 
+                                          Margin="20,0,0,0">
+                                <CollectionView.ItemTemplate>
+                                    <DataTemplate>
+                                        <Label Text="{Binding Title}" Margin="10,5"/>
+                                    </DataTemplate>
+                                </CollectionView.ItemTemplate>
+                            </CollectionView>
+                        </VerticalStackLayout>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+
+            <!-- Create Button -->
+            <Button Text="Create Roadmap" 
+                    Command="{Binding CreateRoadmapCommand}"
+                    Margin="0,30,0,0"
+                    BackgroundColor="{StaticResource Primary}"/>
+        </VerticalStackLayout>
+    </ScrollView>
+</ContentPage>

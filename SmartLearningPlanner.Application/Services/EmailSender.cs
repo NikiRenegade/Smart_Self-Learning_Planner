@@ -29,6 +29,7 @@ public class EmailSender : IEmailSender
 			Body = message,
 			IsBodyHtml = true
 		};
+
 		mailMessage.To.Add(email);
 		await client.SendMailAsync(mailMessage);
 	}

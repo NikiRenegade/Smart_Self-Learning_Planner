@@ -14,6 +14,11 @@ public class Roadmap
     public string Title { get; set; }
 
     /// <summary>
+    /// Краткое описание о чем Roadmap
+    /// </summary>
+    public string? ShortDescription { get; set; }
+
+    /// <summary>
     /// Конспект по текущей Roadmap.
     /// </summary>
     public string Notes { get; set; }
@@ -23,8 +28,19 @@ public class Roadmap
     /// </summary>
     public string Result { get; set; }
 
-    
-    
+    /// <summary>
+    /// Вложенные Roadmap (если есть), представляющие шаги текущей Roadmap.
+    /// </summary>
+    public List<Roadmap> SubRoadmaps { get; set; } = new();
+    public int? ParentRoadmapId;
+
+    /// <summary>
+    /// id создателя Roadmap.
+    /// </summary>
+    public string UserId { get; set; }
+
+
+
     /// <summary>
     /// Список ресурсов (книги, видео, изображения, статьи и др.).
     /// </summary>
@@ -41,18 +57,7 @@ public class Roadmap
     public List<Quiz> Quizzes { get; set; } = new();
 
     /// <summary>
-    /// Вложенные Roadmap (если есть), представляющие шаги текущей Roadmap.
-    /// </summary>
-    public List<Roadmap> SubRoadmaps { get; set; } = new();
-    public int? ParentRoadmapId;
-
-    /// <summary>
     /// Теги для категоризации Roadmap.
     /// </summary>
     public List<Tag> Tags { get; set; } = new();
-
-    /// <summary>
-    /// id создателя Roadmap.
-    /// </summary>
-    public string UserId {get; set;}
 }

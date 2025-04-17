@@ -1,4 +1,6 @@
 ﻿using Microsoft.Extensions.Logging;
+using SmartLearningPlanner.MobileApp.ViewModels;
+using SmartLearningPlanner.MobileApp.Views.Pages;
 
 namespace SmartLearningPlanner.MobileApp;
 
@@ -7,7 +9,8 @@ public static class MauiProgram
 	public static MauiApp CreateMauiApp()
 	{
 		var builder = MauiApp.CreateBuilder();
-		builder
+		      
+        builder
 			.UseMauiApp<App>()
 			.ConfigureFonts(fonts =>
 			{
@@ -19,7 +22,14 @@ public static class MauiProgram
 		builder.Logging.AddDebug();
 #endif
 
-		return builder.Build();
+        builder.Services.AddTransient<CreateRoadmapViewModel>();
+        builder.Services.AddTransient<CreateRoadmapPage>();
+
+        // Регистрация ViewModel и страницы
+        builder.Services.AddSingleton<RoadmapViewModel>();
+        builder.Services.AddTransient<RoadmapViewerPage>();
+
+        return builder.Build();
 	}
 }
 
