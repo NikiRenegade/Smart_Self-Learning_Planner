@@ -1,4 +1,6 @@
-﻿namespace SmartLearningPlanner.MobileApp;
+﻿using SmartLearningPlanner.MobileApp.Views;
+
+namespace SmartLearningPlanner.MobileApp;
 
 public partial class App : Application
 {

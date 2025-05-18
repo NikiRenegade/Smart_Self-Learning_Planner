@@ -10,18 +10,19 @@ public class UserRepository : IUserRepository
 {
     private readonly ApplicationDbContext _context;
     private readonly UserManager<ApplicationUser> _userManager;
+    private readonly SignInManager<ApplicationUser> _signInManager;
 
-    public UserRepository(ApplicationDbContext context, UserManager<ApplicationUser> userManager)
+    public UserRepository(ApplicationDbContext context, UserManager<ApplicationUser> userManager, SignInManager<ApplicationUser> signInManager)
     {
         _context = context;
         _userManager = userManager;
+        _signInManager = signInManager;
     }
 
     public async Task<ApplicationUser> GetByIdAsync(string id)
     {
         return await _context.Users.FindAsync(id);
     }
-
     public async Task<IEnumerable<ApplicationUser>> GetAllAsync()
     {
         return await _context.Users.ToListAsync();
@@ -72,8 +73,24 @@ public class UserRepository : IUserRepository
         {
             var result = await _userManager.ConfirmEmailAsync(user, token);
             if (!result.Succeeded)
-                 throw new Exception($"Email confirmation failed: {string.Join(", ", result.Errors.Select(e => e.Description))}");
+                throw new Exception($"Email confirmation failed: {string.Join(", ", result.Errors.Select(e => e.Description))}");
         }
 
     }
+    public async Task<ApplicationUser> GetByEmailAsync(string email)
+    {
+        return await _userManager.FindByEmailAsync(email);
+    }
+
+    public async Task<bool> IsEmailConfirmedAsync(ApplicationUser user)
+    {
+        return await _userManager.IsEmailConfirmedAsync(user);
+    }
+
+    public async Task<bool> AuthenticateAsync(ApplicationUser user, string password)
+    {
+        var result = await _signInManager.PasswordSignInAsync(user, password, false, false);
+        return result.Succeeded;
+    }
+
 }

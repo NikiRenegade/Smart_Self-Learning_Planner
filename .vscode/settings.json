@@ -5,8 +5,8 @@
 			"server": "localhost",
 			"port": 5432,
 			"driver": "PostgreSQL",
-			"database": "SmartSelfPlannerDB",
 			"name": "SmartLearningPlannerDB",
+			"database": "SmartLearningPlannerDB",
 			"username": "postgres",
 			"password": "P@$$w0rd"
 		},
@@ -15,8 +15,8 @@
 			"server": "localhost",
 			"port": 5432,
 			"driver": "PostgreSQL",
+			"database": "SmartSelfPlannerDB",
 			"name": "SmartLearningPlannerDB",
-			"database": "SmartLearningPlannerDB",
 			"username": "postgres",
 			"password": "P@$$w0rd"
 		}
