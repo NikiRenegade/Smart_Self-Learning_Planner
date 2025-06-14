@@ -28,22 +28,31 @@ public class UserService : IUserService
         { Id = u.Id, UserName = u.UserName, FirstName = u.FirstName, LastName = u.LastName, Email = u.Email });
     }
 
-    public async Task CreateUserAsync(RegisterUserDto registerUserDto)
+    public async Task<bool> CreateUserAsync(RegisterUserDto registerUserDto)
     {
-        ApplicationUser user = new ApplicationUser
+        try
         {
-            UserName = registerUserDto.UserName,
-            FirstName = registerUserDto.FirstName,
-            LastName = registerUserDto.LastName,
-            Email = registerUserDto.Email
-        };
-        var token = await _userRepository.AddAsync(user, registerUserDto.Password);
-        var confirmationLink = $"http://localhost:5188/api/users/confirm-email?id={user.Id}&token={Uri.EscapeDataString(token)}";
+            ApplicationUser user = new ApplicationUser
+            {
+                UserName = registerUserDto.UserName,
+                FirstName = registerUserDto.FirstName,
+                LastName = registerUserDto.LastName,
+                Email = registerUserDto.Email
+            };
+            var token = await _userRepository.AddAsync(user, registerUserDto.Password);
+            var confirmationLink = $"http://localhost:5188/api/users/confirm-email?id={user.Id}&token={Uri.EscapeDataString(token)}";
 
-        var message = $"<p>Здравствуйте, {user.UserName}!</p><p>Подтвердите ваш аккаунт по ссылке ниже <br> <a href='{confirmationLink}'>Подтвердить аккаунт</a>.</p>";
-        await _emailSender.SendEmailAsync(user.Email, "Подтверждение аккаунта", message);
+            var message = $"<p>Здравствуйте, {user.UserName}!</p><p>Подтвердите ваш аккаунт по ссылке ниже <br> <a href='{confirmationLink}'>Подтвердить аккаунт</a>.</p>";
+            await _emailSender.SendEmailAsync(user.Email, "Подтверждение аккаунта", message);
+            return true;
+        }
+        catch
+        {
+            return false;
+        }
+
     }
-        
+
 
     public async Task UpdateUserAsync(UserDto userDto)
     {
@@ -76,10 +85,30 @@ public class UserService : IUserService
         if (user == null) throw new Exception("User not found");
         await _userRepository.ChangePasswordAsync(user, currentPassword, newPassword);
     }
-    
-    public async Task ConfirmUserEmailAsync(string id, string token){
+
+    public async Task ConfirmUserEmailAsync(string id, string token)
+    {
         ApplicationUser user = await _userRepository.GetByIdAsync(id);
         if (user == null) throw new Exception("User not found");
         await _userRepository.ConfirmEmailAsync(id, token);
+    }
+
+    public async Task<UserDto> GetUserByEmailAsync(string email)
+    {
+        ApplicationUser user = await _userRepository.GetByEmailAsync(email);
+        return new UserDto { Id = user.Id, UserName = user.UserName, FirstName = user.FirstName, LastName = user.LastName, Email = user.Email }; ;
+    }
+
+    public async Task<bool> IsUserEmailConfirmedAsync(string email)
+    {
+        ApplicationUser user = await _userRepository.GetByEmailAsync(email);
+
+        return await _userRepository.IsEmailConfirmedAsync(user);
+    }
+
+    public async Task<bool> AuthenticateUserAsync(LoginDto loginDto)
+    {
+        ApplicationUser user = await _userRepository.GetByEmailAsync(loginDto.Email);
+        return await _userRepository.AuthenticateAsync(user, loginDto.Password);
     }
 }

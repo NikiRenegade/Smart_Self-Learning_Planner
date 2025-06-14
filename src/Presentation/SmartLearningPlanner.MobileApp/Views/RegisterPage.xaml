@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:viewModels="clr-namespace:SmartLearningPlanner.MobileApp.ViewModels"
+             xmlns:controls="clr-namespace:SmartLearningPlanner.MobileApp.Controls"
+             x:Class="SmartLearningPlanner.MobileApp.Views.RegisterPage"
+             Title="Регистрация">
+
+        <ScrollView>
+                <controls:AdaptiveVerticalStackLayout>
+
+                        <Label Text="Регистрация в SmartPlanner"
+                               />
+
+                        <Label Text="Логин"
+                                        FontSize="18"/>
+                        <Entry Placeholder="Введите логин"
+                                        FontSize="18"
+                                        Text="{Binding UserName}"
+                                        HeightRequest="50"/>
+                        <Label Text="Имя"
+                                        FontSize="18"/>
+                        <Entry Placeholder="Введите имя"
+                                        FontSize="18"
+                                        Text="{Binding FirstName}"
+                                        HeightRequest="50"/>
+
+                        <Label Text="Фамилия"
+                                        FontSize="18"/>
+                        <Entry Placeholder="Введите фамилию"
+                                        FontSize="18"
+                                        Text="{Binding LastName}"
+                                        HeightRequest="50"/>
+
+                        <Label Text="Email"
+                                        FontSize="18"/>
+                        <Entry Placeholder="Введите email"
+                                        Keyboard="Email"
+                                        FontSize="18"
+                                        Text="{Binding Email}"
+                                        HeightRequest="50"/>
+
+                        <Label Text="Пароль"
+                                        FontSize="18"/>
+                        <Entry Placeholder="Введите пароль"
+                                        IsPassword="True"
+                                        FontSize="18"
+                                        Text="{Binding Password}"
+                                        HeightRequest="50"/>
+
+
+                        <Button Text="Зарегистрироваться"
+                                FontSize="18"
+                                HeightRequest="50"
+                                BackgroundColor="#9B59B6"
+                                TextColor="White"
+                                Command="{Binding RegisterCommand}"
+                                CornerRadius="10"/>
+
+                </controls:AdaptiveVerticalStackLayout>
+        </ScrollView>
+</ContentPage>

@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:viewModels="clr-namespace:SmartLearningPlanner.MobileApp.ViewModels"
+             xmlns:controls="clr-namespace:SmartLearningPlanner.MobileApp.Controls"
+             x:Class="SmartLearningPlanner.MobileApp.Views.LoginPage"
+             Title="Вход">
+
+       <ScrollView>
+              <controls:AdaptiveVerticalStackLayout>
+
+                     <Label x:Name="TitleLabel"
+                            Text="Добро пожаловать в SmartPlanner!"
+                            />
+
+                     <Label Text="Email"
+                            FontSize="18"/>
+                     <Entry Placeholder="Введите email"
+                            Keyboard="Email"
+                            FontSize="18"
+                            Text="{Binding Email}"
+                            HeightRequest="50"/>
+
+                     <Label Text="Пароль"
+                            FontSize="18"/>
+                     <Entry Placeholder="Введите пароль"
+                            IsPassword="True"
+                            FontSize="18"
+                            Text="{Binding Password}"
+                            HeightRequest="50"/>
+
+                     <Button Text="Войти"
+                             x:Name="LoginButton"
+                             FontSize="18"
+                             HeightRequest="50"
+                             BackgroundColor="#9B59B6"
+                             TextColor="White"
+                             Command="{Binding LoginCommand}"
+                             CornerRadius="10"
+                            />
+
+                     <Label Text="или войти через"
+                            HorizontalOptions="Center"
+                            FontSize="16"/>
+
+                     <HorizontalStackLayout Spacing="15"
+                                            HorizontalOptions="Center">
+                            <Button Text="ВКонтакте"
+                                    x:Name="VKButton"
+                                    FontSize="16"
+                                    HeightRequest="45"
+                                    WidthRequest="120"
+                                    BackgroundColor="#4680C2"
+                                    TextColor="White"
+                                    Command ="{Binding VkLoginCommand} "
+                                    CornerRadius="10"/>
+                            <Button Text="Яндекс"
+                                    x:Name="YandexButton"
+                                    FontSize="16"
+                                    HeightRequest="45"
+                                    WidthRequest="120"
+                                    BackgroundColor="#FFCC00"
+                                    TextColor="Black"
+                                    Command="{Binding YandexLoginCommand}"
+                                    CornerRadius="10"/>
+                     </HorizontalStackLayout>
+
+                     <HorizontalStackLayout HorizontalOptions="Center"
+                                            Spacing="5">
+                            <Label Text="Нет аккаунта?"
+                                   FontSize="14"/>
+                            <Label Text="Регистрация"
+                                   TextColor="Blue"
+                                   FontSize="14">
+                                   <Label.GestureRecognizers>
+                                          <TapGestureRecognizer Command="{Binding NavigateToRegisterCommand}"/>
+                                   </Label.GestureRecognizers>
+                            </Label>
+                     </HorizontalStackLayout>
+
+                     <!-- Переключатель темы -->
+                     <HorizontalStackLayout HorizontalOptions="Center"
+                                            Spacing="10">
+                            <Label Text="Тема:"
+                                   FontSize="14"/>
+                            <Switch IsToggled="{Binding IsDarkTheme}"/>
+                     </HorizontalStackLayout>
+
+                     <!-- VisualStateManager для адаптации -->
+
+              </controls:AdaptiveVerticalStackLayout>
+       </ScrollView>
+
+</ContentPage>

@@ -35,8 +35,15 @@ public class UsersController : ControllerBase
     [HttpPost("register")]
     public async Task<ActionResult> RegisterUser(RegisterUserDto registerUserDto)
     {
-        await _userService.CreateUserAsync(registerUserDto);
-        return NoContent();
+        bool userCreationResult = await _userService.CreateUserAsync(registerUserDto);
+        if (userCreationResult)
+        {
+            return CreatedAtAction(nameof(RegisterUser), new { email = registerUserDto.Email }, registerUserDto);
+        }
+        else
+        {
+            return BadRequest("Ошибка при регистрации пользователя.");
+        }
     }
 
     [HttpPut("{id}")]
@@ -74,6 +81,24 @@ public class UsersController : ControllerBase
         await _userService.ConfirmUserEmailAsync(id, token);
         return Ok("Email успешно подтвержден!");
     }
+
+    [HttpPost("login")]
+    public async Task<ActionResult> Login([FromBody] LoginDto loginDto)
+    {
+
+        if (await _userService.GetUserByEmailAsync(loginDto.Email) == null)
+            return Unauthorized("Данный email не найден.");
+
+        if (!await _userService.IsUserEmailConfirmedAsync(loginDto.Email))
+            return Unauthorized("Пожалуйста, подтвердите свой email перед входом.");
+
+        if (!await _userService.AuthenticateUserAsync(loginDto))
+            return Unauthorized("Неверный email или пароль.");
+
+        return Ok("Вход выполнен успешно.");
+    }
+
+
 }
 //24602593-5cfb-4733-9ff2-c5e2dbb4191a
 //123456789azAZ!
