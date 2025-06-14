@@ -424,5 +424,49 @@
         <Setter Property="SelectedTabColor" Value="{AppThemeBinding Light={StaticResource Gray950}, Dark={StaticResource Gray200}}" />
     </Style>
 
+    
+    
+    
+    
+    
+    <!-- Основная кнопка -->
+    <Style x:Key="PrimaryButtonStyle" TargetType="Button">
+        <Setter Property="BackgroundColor" Value="#4C8EFF" />
+        <Setter Property="TextColor" Value="White" />
+        <Setter Property="CornerRadius" Value="12" />
+        <Setter Property="FontSize" Value="16" />
+        <Setter Property="Padding" Value="12,8" />
+        <Setter Property="FontAttributes" Value="Bold" />
+    </Style>
+
+    <!-- Вторичная (светлая) кнопка -->
+    <Style x:Key="SecondaryButtonStyle" TargetType="Button">
+        <Setter Property="BackgroundColor" Value="#F0F4FF" />
+        <Setter Property="TextColor" Value="#4C8EFF" />
+        <Setter Property="CornerRadius" Value="12" />
+        <Setter Property="FontSize" Value="16" />
+        <Setter Property="Padding" Value="12,8" />
+        <Setter Property="FontAttributes" Value="Bold" />
+    </Style>
+
+    <!-- Маленькая кнопка (например, в карточках) -->
+    <Style x:Key="MiniButtonStyle" TargetType="Button">
+        <Setter Property="BackgroundColor" Value="#4C8EFF" />
+        <Setter Property="TextColor" Value="White" />
+        <Setter Property="CornerRadius" Value="8" />
+        <Setter Property="FontSize" Value="12" />
+        <Setter Property="Padding" Value="6,4" />
+    </Style>
+
+    <!-- Кнопка со скруглением по кругу (FAB) -->
+    <Style x:Key="FabButtonStyle" TargetType="Button">
+        <Setter Property="BackgroundColor" Value="#4C8EFF" />
+        <Setter Property="TextColor" Value="White" />
+        <Setter Property="CornerRadius" Value="30" />
+        <Setter Property="HeightRequest" Value="56" />
+        <Setter Property="WidthRequest" Value="56" />
+        <Setter Property="FontSize" Value="24" />
+    </Style>
+
 </ResourceDictionary>
 

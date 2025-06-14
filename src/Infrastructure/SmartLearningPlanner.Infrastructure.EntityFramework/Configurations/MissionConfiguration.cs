@@ -23,10 +23,12 @@ public class MissionConfiguration : IEntityTypeConfiguration<Mission>
 				
 				builder.Property(m => m.IsCompleted)
 						.IsRequired();
-						
+					
+		/*
 				// Установка связей		
-				 builder.HasOne<Roadmap>().WithMany(r => r.Missions)
-						.HasForeignKey("RoadmapId")
-						.OnDelete(DeleteBehavior.Cascade);
+				 builder.HasOne<MindmapNode>().WithMany(r => r.Missions)
+						.HasForeignKey(m => m.MindmapNodeId)
+                        .OnDelete(DeleteBehavior.Cascade);
+		*/
     }
 }

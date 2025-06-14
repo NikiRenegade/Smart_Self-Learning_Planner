@@ -8,11 +8,21 @@ namespace SmartLearningPlanner.Infrastructure.EntityFramework;
 public class ApplicationDbContext: IdentityDbContext<ApplicationUser>
 {
     public DbSet<Tag> Tags => Set<Tag>();
+
     public DbSet<AnswerOption> AnswerOptions => Set<AnswerOption>();
+
     public DbSet<Quiz> Quizs => Set<Quiz>();
+
     public DbSet<QuizQuestion> QuizQuestions => Set<QuizQuestion>();
-    public DbSet<Roadmap> Roadmaps => Set<Roadmap>();
+
+    public DbSet<UserNodeProgress> UserNodeProgresses => Set<UserNodeProgress>();
+
+    public DbSet<MindmapNode> MindmapNodes => Set<MindmapNode>();
+
+    public DbSet<MindmapEdge> MindmapEdges => Set<MindmapEdge>();
+
     public DbSet<Mission> Missions => Set<Mission>();
+
     
     public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : base(options)
     {

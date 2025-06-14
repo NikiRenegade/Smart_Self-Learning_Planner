@@ -3,6 +3,8 @@ using SmartLearningPlanner.MobileApp.Services;
 using SmartLearningPlanner.MobileApp.ViewModels;
 using SmartLearningPlanner.MobileApp.Views;
 using SmartLearningPlanner.MobileApp.Options;
+using SmartLearningPlanner.MobileApp.Views.Pages;
+
 namespace SmartLearningPlanner.MobileApp;
 
 public static class MauiProgram
@@ -10,7 +12,8 @@ public static class MauiProgram
 	public static MauiApp CreateMauiApp()
 	{
 		var builder = MauiApp.CreateBuilder();
-		builder
+		      
+        builder
 			.UseMauiApp<App>()
 			.ConfigureFonts(fonts =>
 			{
@@ -35,11 +38,37 @@ public static class MauiProgram
 			BaseUrl = "http://127.0.0.1:5188/api"
 		});
 
-#if DEBUG
+		#if DEBUG
 		builder.Logging.AddDebug();
-#endif
+        #endif
 
-		return builder.Build();
+        // Register HttpClient
+        string BaseUrl = DeviceInfo.Platform == DevicePlatform.Android
+                                    ? "http://10.0.2.2:5188/api/"
+                                    : "http://localhost:5188/api/";
+        builder.Services.AddHttpClient<IRoadmapService, RoadmapService>(client =>
+        {
+            client.BaseAddress = new Uri(BaseUrl);
+        });
+
+        // Register services
+        builder.Services.AddSingleton<IRoadmapService, RoadmapService>();
+
+        builder.Services.AddTransient<CreateRoadmapViewModel>();
+        builder.Services.AddTransient<CreateRoadmapPage>();
+
+        // Регистрация ViewModel и страницы
+        builder.Services.AddSingleton<RoadmapListViewModel>();
+        builder.Services.AddSingleton<MyRoadmapsPage>();
+
+        //builder.Services.AddTransient<RoadmapDetailViewModel>();
+
+        builder.Services.AddSingleton<RoadmapViewModel>();
+        builder.Services.AddTransient<RoadmapViewerPage>();
+
+        return builder.Build();
 	}
 }
 
+
+        

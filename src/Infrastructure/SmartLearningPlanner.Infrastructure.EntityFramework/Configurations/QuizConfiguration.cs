@@ -24,10 +24,12 @@ public class QuizConfiguration : IEntityTypeConfiguration<Quiz>
 
         builder.HasMany(q => q.Questions).WithOne()
 						.OnDelete(DeleteBehavior.Cascade);
-						
+		
+        /*
 				// Установка связей		
-        builder.HasOne<Roadmap>().WithMany(r => r.Quizzes)
-						.HasForeignKey("RoadmapId")
-						.OnDelete(DeleteBehavior.Cascade);
+        builder.HasOne<MindmapNode>().WithMany(r => r.Quizzes)
+                        .HasForeignKey(m => m.MindmapNodeId)
+                        .OnDelete(DeleteBehavior.Cascade);
+        */
     }
 }

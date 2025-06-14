@@ -180,194 +180,7 @@ namespace SmartLearningPlanner.Infrastructure.EntityFramework.Migrations
                     b.ToTable("AnswerOptions", (string)null);
                 });
 
-            modelBuilder.Entity("SmartLearningPlanner.Domain.Entities.Mission", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("integer");
-
-                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
-
-                    b.Property<string>("Description")
-                        .IsRequired()
-                        .HasMaxLength(1024)
-                        .HasColumnType("character varying(1024)");
-
-                    b.Property<bool>("IsCompleted")
-                        .HasColumnType("boolean");
-
-                    b.Property<int?>("RoadmapId")
-                        .HasColumnType("integer");
-
-                    b.Property<string>("Title")
-                        .IsRequired()
-                        .HasMaxLength(512)
-                        .HasColumnType("character varying(512)");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("RoadmapId");
-
-                    b.ToTable("Missions", (string)null);
-                });
-
-            modelBuilder.Entity("SmartLearningPlanner.Domain.Entities.Quiz", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("integer");
-
-                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
-
-                    b.Property<string>("Description")
-                        .HasMaxLength(1024)
-                        .HasColumnType("character varying(1024)");
-
-                    b.Property<int?>("RoadmapId")
-                        .HasColumnType("integer");
-
-                    b.Property<string>("Title")
-                        .IsRequired()
-                        .HasMaxLength(256)
-                        .HasColumnType("character varying(256)");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("RoadmapId");
-
-                    b.ToTable("Quizzes", (string)null);
-                });
-
-            modelBuilder.Entity("SmartLearningPlanner.Domain.Entities.QuizQuestion", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("integer");
-
-                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
-
-                    b.Property<string>("CorrectAnswer")
-                        .HasMaxLength(512)
-                        .HasColumnType("character varying(512)");
-
-                    b.Property<string>("QuestionText")
-                        .IsRequired()
-                        .HasMaxLength(2048)
-                        .HasColumnType("character varying(2048)");
-
-                    b.Property<int?>("QuizId")
-                        .HasColumnType("integer");
-
-                    b.Property<int>("Type")
-                        .HasColumnType("integer");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("QuizId");
-
-                    b.ToTable("QuizQuestions", (string)null);
-                });
-
-            modelBuilder.Entity("SmartLearningPlanner.Domain.Entities.Resource", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("integer");
-
-                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
-
-                    b.Property<string>("Description")
-                        .IsRequired()
-                        .HasMaxLength(512)
-                        .HasColumnType("character varying(512)");
-
-                    b.Property<string>("LocalPath")
-                        .HasMaxLength(1024)
-                        .HasColumnType("character varying(1024)");
-
-                    b.Property<int?>("RoadmapId")
-                        .HasColumnType("integer");
-
-                    b.Property<int>("Type")
-                        .HasColumnType("integer");
-
-                    b.Property<string>("Url")
-                        .HasMaxLength(1024)
-                        .HasColumnType("character varying(1024)");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("RoadmapId");
-
-                    b.ToTable("Resources", (string)null);
-                });
-
-            modelBuilder.Entity("SmartLearningPlanner.Domain.Entities.Roadmap", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("integer");
-
-                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
-
-                    b.Property<string>("Notes")
-                        .IsRequired()
-                        .HasMaxLength(1024)
-                        .HasColumnType("character varying(1024)");
-
-                    b.Property<int?>("ParentRoadmapId")
-                        .HasColumnType("integer");
-
-                    b.Property<string>("Result")
-                        .IsRequired()
-                        .HasMaxLength(1024)
-                        .HasColumnType("character varying(1024)");
-
-                    b.Property<string>("Title")
-                        .IsRequired()
-                        .HasMaxLength(256)
-                        .HasColumnType("character varying(256)");
-
-                    b.Property<string>("UserId")
-                        .IsRequired()
-                        .HasColumnType("text");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("ParentRoadmapId");
-
-                    b.ToTable("Roadmaps", (string)null);
-                });
-
-            modelBuilder.Entity("SmartLearningPlanner.Domain.Entities.Tag", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("integer");
-
-                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
-
-                    b.Property<string>("Code")
-                        .IsRequired()
-                        .HasMaxLength(128)
-                        .HasColumnType("character varying(128)");
-
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasMaxLength(256)
-                        .HasColumnType("character varying(256)");
-
-                    b.Property<int?>("RoadmapId")
-                        .HasColumnType("integer");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("RoadmapId");
-
-                    b.ToTable("Tags", (string)null);
-                });
-
-            modelBuilder.Entity("SmartLearningPlanner.Infrastructure.EntityFramework.ApplicationUser", b =>
+            modelBuilder.Entity("SmartLearningPlanner.Domain.Entities.ApplicationUser", b =>
                 {
                     b.Property<string>("Id")
                         .HasColumnType("text");
@@ -441,6 +254,243 @@ namespace SmartLearningPlanner.Infrastructure.EntityFramework.Migrations
                     b.ToTable("Users", (string)null);
                 });
 
+            modelBuilder.Entity("SmartLearningPlanner.Domain.Entities.MindmapEdge", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer");
+
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
+
+                    b.Property<int>("ChildId")
+                        .HasColumnType("integer");
+
+                    b.Property<int?>("MindmapNodeId")
+                        .HasColumnType("integer");
+
+                    b.Property<int>("Order")
+                        .HasColumnType("integer");
+
+                    b.Property<int>("ParentId")
+                        .HasColumnType("integer");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ChildId");
+
+                    b.HasIndex("MindmapNodeId");
+
+                    b.HasIndex("ParentId");
+
+                    b.ToTable("MindmapEdges", (string)null);
+                });
+
+            modelBuilder.Entity("SmartLearningPlanner.Domain.Entities.MindmapNode", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer");
+
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("Notes")
+                        .IsRequired()
+                        .HasMaxLength(2000)
+                        .HasColumnType("character varying(2000)");
+
+                    b.Property<string>("Result")
+                        .IsRequired()
+                        .HasMaxLength(1000)
+                        .HasColumnType("character varying(1000)");
+
+                    b.Property<string>("ShortDescription")
+                        .HasMaxLength(500)
+                        .HasColumnType("character varying(500)");
+
+                    b.Property<string>("Title")
+                        .IsRequired()
+                        .HasMaxLength(200)
+                        .HasColumnType("character varying(200)");
+
+                    b.Property<string>("UserId")
+                        .IsRequired()
+                        .HasMaxLength(50)
+                        .HasColumnType("character varying(50)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("MindmapNodes", (string)null);
+                });
+
+            modelBuilder.Entity("SmartLearningPlanner.Domain.Entities.Mission", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer");
+
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("Description")
+                        .IsRequired()
+                        .HasMaxLength(1024)
+                        .HasColumnType("character varying(1024)");
+
+                    b.Property<bool>("IsCompleted")
+                        .HasColumnType("boolean");
+
+                    b.Property<int>("MindmapNodeId")
+                        .HasColumnType("integer");
+
+                    b.Property<string>("Title")
+                        .IsRequired()
+                        .HasMaxLength(512)
+                        .HasColumnType("character varying(512)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("MindmapNodeId");
+
+                    b.ToTable("Missions", (string)null);
+                });
+
+            modelBuilder.Entity("SmartLearningPlanner.Domain.Entities.Quiz", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer");
+
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("Description")
+                        .HasMaxLength(1024)
+                        .HasColumnType("character varying(1024)");
+
+                    b.Property<int>("MindmapNodeId")
+                        .HasColumnType("integer");
+
+                    b.Property<string>("Title")
+                        .IsRequired()
+                        .HasMaxLength(256)
+                        .HasColumnType("character varying(256)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("MindmapNodeId");
+
+                    b.ToTable("Quizzes", (string)null);
+                });
+
+            modelBuilder.Entity("SmartLearningPlanner.Domain.Entities.QuizQuestion", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer");
+
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("CorrectAnswer")
+                        .HasMaxLength(512)
+                        .HasColumnType("character varying(512)");
+
+                    b.Property<string>("QuestionText")
+                        .IsRequired()
+                        .HasMaxLength(2048)
+                        .HasColumnType("character varying(2048)");
+
+                    b.Property<int?>("QuizId")
+                        .HasColumnType("integer");
+
+                    b.Property<int>("Type")
+                        .HasColumnType("integer");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("QuizId");
+
+                    b.ToTable("QuizQuestions", (string)null);
+                });
+
+            modelBuilder.Entity("SmartLearningPlanner.Domain.Entities.Resource", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer");
+
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("Description")
+                        .IsRequired()
+                        .HasMaxLength(512)
+                        .HasColumnType("character varying(512)");
+
+                    b.Property<string>("LocalPath")
+                        .HasMaxLength(1024)
+                        .HasColumnType("character varying(1024)");
+
+                    b.Property<int>("MindmapNodeId")
+                        .HasColumnType("integer");
+
+                    b.Property<int>("Type")
+                        .HasColumnType("integer");
+
+                    b.Property<string>("Url")
+                        .HasMaxLength(1024)
+                        .HasColumnType("character varying(1024)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("MindmapNodeId");
+
+                    b.ToTable("Resources", (string)null);
+                });
+
+            modelBuilder.Entity("SmartLearningPlanner.Domain.Entities.Tag", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer");
+
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("Code")
+                        .IsRequired()
+                        .HasMaxLength(128)
+                        .HasColumnType("character varying(128)");
+
+                    b.Property<int?>("MindmapNodeId")
+                        .HasColumnType("integer");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasMaxLength(256)
+                        .HasColumnType("character varying(256)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("MindmapNodeId");
+
+                    b.ToTable("Tags", (string)null);
+                });
+
+            modelBuilder.Entity("SmartLearningPlanner.Domain.Entities.UserNodeProgress", b =>
+                {
+                    b.Property<string>("UserId")
+                        .HasMaxLength(50)
+                        .HasColumnType("character varying(50)");
+
+                    b.Property<int>("NodeId")
+                        .HasColumnType("integer");
+
+                    b.Property<int>("Status")
+                        .HasColumnType("integer");
+
+                    b.HasKey("UserId", "NodeId");
+
+                    b.HasIndex("NodeId");
+
+                    b.ToTable("UserNodeProgress", (string)null);
+                });
+
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
                 {
                     b.HasOne("Microsoft.AspNetCore.Identity.IdentityRole", null)
@@ -452,7 +502,7 @@ namespace SmartLearningPlanner.Infrastructure.EntityFramework.Migrations
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserClaim<string>", b =>
                 {
-                    b.HasOne("SmartLearningPlanner.Infrastructure.EntityFramework.ApplicationUser", null)
+                    b.HasOne("SmartLearningPlanner.Domain.Entities.ApplicationUser", null)
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -461,7 +511,7 @@ namespace SmartLearningPlanner.Infrastructure.EntityFramework.Migrations
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserLogin<string>", b =>
                 {
-                    b.HasOne("SmartLearningPlanner.Infrastructure.EntityFramework.ApplicationUser", null)
+                    b.HasOne("SmartLearningPlanner.Domain.Entities.ApplicationUser", null)
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -476,7 +526,7 @@ namespace SmartLearningPlanner.Infrastructure.EntityFramework.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("SmartLearningPlanner.Infrastructure.EntityFramework.ApplicationUser", null)
+                    b.HasOne("SmartLearningPlanner.Domain.Entities.ApplicationUser", null)
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -485,7 +535,7 @@ namespace SmartLearningPlanner.Infrastructure.EntityFramework.Migrations
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserToken<string>", b =>
                 {
-                    b.HasOne("SmartLearningPlanner.Infrastructure.EntityFramework.ApplicationUser", null)
+                    b.HasOne("SmartLearningPlanner.Domain.Entities.ApplicationUser", null)
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -500,20 +550,49 @@ namespace SmartLearningPlanner.Infrastructure.EntityFramework.Migrations
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 
+            modelBuilder.Entity("SmartLearningPlanner.Domain.Entities.MindmapEdge", b =>
+                {
+                    b.HasOne("SmartLearningPlanner.Domain.Entities.MindmapNode", "Child")
+                        .WithMany()
+                        .HasForeignKey("ChildId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("SmartLearningPlanner.Domain.Entities.MindmapNode", null)
+                        .WithMany("Parents")
+                        .HasForeignKey("MindmapNodeId");
+
+                    b.HasOne("SmartLearningPlanner.Domain.Entities.MindmapNode", "Parent")
+                        .WithMany()
+                        .HasForeignKey("ParentId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Child");
+
+                    b.Navigation("Parent");
+                });
+
             modelBuilder.Entity("SmartLearningPlanner.Domain.Entities.Mission", b =>
                 {
-                    b.HasOne("SmartLearningPlanner.Domain.Entities.Roadmap", null)
+                    b.HasOne("SmartLearningPlanner.Domain.Entities.MindmapNode", "MindmapNode")
                         .WithMany("Missions")
-                        .HasForeignKey("RoadmapId")
-                        .OnDelete(DeleteBehavior.Cascade);
+                        .HasForeignKey("MindmapNodeId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("MindmapNode");
                 });
 
             modelBuilder.Entity("SmartLearningPlanner.Domain.Entities.Quiz", b =>
                 {
-                    b.HasOne("SmartLearningPlanner.Domain.Entities.Roadmap", null)
+                    b.HasOne("SmartLearningPlanner.Domain.Entities.MindmapNode", "MindmapNode")
                         .WithMany("Quizzes")
-                        .HasForeignKey("RoadmapId")
-                        .OnDelete(DeleteBehavior.Cascade);
+                        .HasForeignKey("MindmapNodeId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("MindmapNode");
                 });
 
             modelBuilder.Entity("SmartLearningPlanner.Domain.Entities.QuizQuestion", b =>
@@ -526,26 +605,44 @@ namespace SmartLearningPlanner.Infrastructure.EntityFramework.Migrations
 
             modelBuilder.Entity("SmartLearningPlanner.Domain.Entities.Resource", b =>
                 {
-                    b.HasOne("SmartLearningPlanner.Domain.Entities.Roadmap", null)
+                    b.HasOne("SmartLearningPlanner.Domain.Entities.MindmapNode", "MindmapNode")
                         .WithMany("Resources")
-                        .HasForeignKey("RoadmapId")
-                        .OnDelete(DeleteBehavior.Cascade);
-                });
+                        .HasForeignKey("MindmapNodeId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
-            modelBuilder.Entity("SmartLearningPlanner.Domain.Entities.Roadmap", b =>
-                {
-                    b.HasOne("SmartLearningPlanner.Domain.Entities.Roadmap", null)
-                        .WithMany("SubRoadmaps")
-                        .HasForeignKey("ParentRoadmapId")
-                        .OnDelete(DeleteBehavior.Cascade);
+                    b.Navigation("MindmapNode");
                 });
 
             modelBuilder.Entity("SmartLearningPlanner.Domain.Entities.Tag", b =>
                 {
-                    b.HasOne("SmartLearningPlanner.Domain.Entities.Roadmap", null)
+                    b.HasOne("SmartLearningPlanner.Domain.Entities.MindmapNode", null)
                         .WithMany("Tags")
-                        .HasForeignKey("RoadmapId")
-                        .OnDelete(DeleteBehavior.Cascade);
+                        .HasForeignKey("MindmapNodeId");
+                });
+
+            modelBuilder.Entity("SmartLearningPlanner.Domain.Entities.UserNodeProgress", b =>
+                {
+                    b.HasOne("SmartLearningPlanner.Domain.Entities.MindmapNode", "Node")
+                        .WithMany()
+                        .HasForeignKey("NodeId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Node");
+                });
+
+            modelBuilder.Entity("SmartLearningPlanner.Domain.Entities.MindmapNode", b =>
+                {
+                    b.Navigation("Missions");
+
+                    b.Navigation("Parents");
+
+                    b.Navigation("Quizzes");
+
+                    b.Navigation("Resources");
+
+                    b.Navigation("Tags");
                 });
 
             modelBuilder.Entity("SmartLearningPlanner.Domain.Entities.Quiz", b =>
@@ -556,19 +653,6 @@ namespace SmartLearningPlanner.Infrastructure.EntityFramework.Migrations
             modelBuilder.Entity("SmartLearningPlanner.Domain.Entities.QuizQuestion", b =>
                 {
                     b.Navigation("Options");
-                });
-
-            modelBuilder.Entity("SmartLearningPlanner.Domain.Entities.Roadmap", b =>
-                {
-                    b.Navigation("Missions");
-
-                    b.Navigation("Quizzes");
-
-                    b.Navigation("Resources");
-
-                    b.Navigation("SubRoadmaps");
-
-                    b.Navigation("Tags");
                 });
 #pragma warning restore 612, 618
         }

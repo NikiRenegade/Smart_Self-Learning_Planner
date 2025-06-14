@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="SmartLearningPlanner.MobileApp.Views.Pages.HomePage"
+             NavigationPage.HasNavigationBar="False"
+>
+
+
+    <ScrollView>
+        <VerticalStackLayout Padding="20" Spacing="20">
+
+            <!-- Welcome title -->
+            <Label Text="Добро пожаловать"
+                   FontSize="28"
+                   FontAttributes="Bold" />
+
+            <!-- My Roadmaps Section -->
+            <Label Text="Последние mindmaps"
+                   FontSize="20"
+                   FontAttributes="Bold" />
+
+            <VerticalStackLayout Spacing="10">
+                <!-- One Card Example -->
+                <Frame BorderColor="#ddd" CornerRadius="12" Padding="10">
+                    <VerticalStackLayout>
+                        <Grid>
+                            <Label Text="React"
+                                   FontSize="18"
+                                   FontAttributes="Bold" />
+                            <Button Text="Продолжить"
+                                    HorizontalOptions="End"
+                                    FontSize="12" />
+                        </Grid>
+                        <Label Text="🔵 30% пройдено" TextColor="DarkSlateGray"/>
+                        <Label Text="В процессе · Открыто 3 дня назад"
+                               FontSize="12"
+                               TextColor="Gray" />
+                    </VerticalStackLayout>
+                </Frame>
+
+                <Frame BorderColor="#ddd" CornerRadius="12" Padding="10">
+                    <VerticalStackLayout>
+                        <Grid>
+                            <Label Text="Docker"
+                                   FontSize="18"
+                                   FontAttributes="Bold" />
+                            <Button Text="Продолжить"
+                                    HorizontalOptions="End"
+                                    FontSize="12" />
+                        </Grid>
+                        <Label Text="🟢 75% пройдено" TextColor="DarkSlateGray"/>
+                        <Label Text="В процессе · Открыто на прошлой неделе"
+                               FontSize="12"
+                               TextColor="Gray" />
+                    </VerticalStackLayout>
+                </Frame>
+
+                <Frame BorderColor="#ddd" CornerRadius="12" Padding="10">
+                    <VerticalStackLayout>
+                        <Grid>
+                            <Label Text="Machine Learning"
+                                   FontSize="18"
+                                   FontAttributes="Bold" />
+                        </Grid>
+                        <Label Text="✅ Завершено" TextColor="Green"/>
+                        <Label Text="Открыто · 2 недели назад"
+                               FontSize="12"
+                               TextColor="Gray" />
+                    </VerticalStackLayout>
+                </Frame>
+            </VerticalStackLayout>
+
+            <!-- Explore New Section -->
+            <Label Text="Изучай новое"
+                   FontSize="20"
+                   FontAttributes="Bold"/>
+
+            <HorizontalStackLayout Spacing="10">
+                <!-- New Card -->
+                <Frame WidthRequest="160" BorderColor="#ddd" CornerRadius="12" Padding="10">
+                    <VerticalStackLayout>
+                        <Image Source="typescript_graph.png"
+                               HeightRequest="80"
+                               Aspect="AspectFit" />
+                        <Label Text="TypeScript" FontAttributes="Bold"/>
+                        <Label Text="Дорожная карта изучения TypeScript"
+                               FontSize="12" TextColor="Gray" />
+                        <Label Text="Для начинающих" FontSize="10" TextColor="DarkSlateGray" />
+                    </VerticalStackLayout>
+                </Frame>
+
+                <Frame WidthRequest="160" BorderColor="#ddd" CornerRadius="12" Padding="10">
+                    <VerticalStackLayout>
+                        <Image Source="kubernetes_graph.png"
+                               HeightRequest="80"
+                               Aspect="AspectFit" />
+                        <Label Text="Kubernetes" FontAttributes="Bold"/>
+                        <Label Text="Дорожная карта изучения Kubernetes"
+                               FontSize="12" TextColor="Gray" />
+                        <Label Text="Средний уровень" FontSize="10" TextColor="DarkSlateGray" />
+                    </VerticalStackLayout>
+                </Frame>
+            </HorizontalStackLayout>
+
+        </VerticalStackLayout>
+    </ScrollView>
+</ContentPage>
