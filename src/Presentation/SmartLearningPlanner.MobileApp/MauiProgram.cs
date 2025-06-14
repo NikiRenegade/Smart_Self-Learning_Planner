@@ -4,6 +4,7 @@ using SmartLearningPlanner.MobileApp.ViewModels;
 using SmartLearningPlanner.MobileApp.Views;
 using SmartLearningPlanner.MobileApp.Options;
 using SmartLearningPlanner.MobileApp.Views.Pages;
+
 namespace SmartLearningPlanner.MobileApp;
 
 public static class MauiProgram
