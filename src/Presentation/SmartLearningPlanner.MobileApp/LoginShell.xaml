@@ -1,0 +1,22 @@
+﻿<?xml version="1.0" encoding="UTF-8" ?>
+<Shell
+    x:Class="SmartLearningPlanner.MobileApp.LoginShell"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:page="clr-namespace:SmartLearningPlanner.MobileApp.Views.Pages"
+    Shell.FlyoutBehavior="Disabled"
+    Title="SmartLearningPlanner.MobileApp">
+
+    <TabBar>
+        <ShellContent
+            Icon="profile.png"
+            ContentTemplate="{DataTemplate page:LoginPage}"
+            Route="LoginPage"/>
+
+        <ShellContent
+            Icon="profile.png"
+            ContentTemplate="{DataTemplate page:RegisterPage}"
+            Route="RegisterPage"/>
+    </TabBar>
+</Shell>
+

@@ -28,16 +28,6 @@ public class UserRepository : IUserRepository
         return await _context.Users.ToListAsync();
     }
 
-    public async Task<string> AddAsync(ApplicationUser user, string password)
-    {
-        var result = await _userManager.CreateAsync(user, password);
-        if (!result.Succeeded)
-        {
-            throw new Exception($"Failed to create user: {string.Join(", ", result.Errors.Select(e => e.Description))}");
-        }
-        return await _userManager.GenerateEmailConfirmationTokenAsync(user);
-    }
-
     public async Task UpdateAsync(ApplicationUser user)
     {
         _context.Users.Update(user);
@@ -53,44 +43,14 @@ public class UserRepository : IUserRepository
             await _context.SaveChangesAsync();
         }
     }
-    public async Task<bool> CheckPasswordAsync(ApplicationUser user, string password)
-    {
-        return await _userManager.CheckPasswordAsync(user, password);
-    }
 
-    public async Task ChangePasswordAsync(ApplicationUser user, string currentPassword, string newPassword)
-    {
-        var result = await _userManager.ChangePasswordAsync(user, currentPassword, newPassword);
-        if (!result.Succeeded)
-        {
-            throw new Exception($"Failed to change password: {string.Join(", ", result.Errors.Select(e => e.Description))}");
-        }
-    }
-    public async Task ConfirmEmailAsync(string id, string token)
-    {
-        var user = await _userManager.FindByIdAsync(id);
-        if (user != null)
-        {
-            var result = await _userManager.ConfirmEmailAsync(user, token);
-            if (!result.Succeeded)
-                throw new Exception($"Email confirmation failed: {string.Join(", ", result.Errors.Select(e => e.Description))}");
-        }
-
-    }
     public async Task<ApplicationUser> GetByEmailAsync(string email)
     {
         return await _userManager.FindByEmailAsync(email);
     }
 
-    public async Task<bool> IsEmailConfirmedAsync(ApplicationUser user)
+    public async Task<string> GetUserIdByEmailAsync(string email)
     {
-        return await _userManager.IsEmailConfirmedAsync(user);
+        return (await _userManager.FindByEmailAsync(email))?.Id ?? string.Empty;
     }
-
-    public async Task<bool> AuthenticateAsync(ApplicationUser user, string password)
-    {
-        var result = await _signInManager.PasswordSignInAsync(user, password, false, false);
-        return result.Succeeded;
-    }
-
 }

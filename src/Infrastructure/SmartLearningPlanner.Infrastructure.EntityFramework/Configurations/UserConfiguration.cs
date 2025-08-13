@@ -6,25 +6,32 @@ namespace SmartLearningPlanner.Infrastructure.EntityFramework.Configurations;
 
 public class UserConfiguration : IEntityTypeConfiguration<ApplicationUser>
 {
-    public void Configure(EntityTypeBuilder<ApplicationUser> builder) 
-		{
+	public void Configure(EntityTypeBuilder<ApplicationUser> builder)
+	{
 
-        // Указываем таблицу, в которой будет храниться сущность
-        builder.ToTable("Users");
+		// Указываем таблицу, в которой будет храниться сущность
+		builder.ToTable("Users");
 
-        // Указываем первичный ключ
-        builder.HasKey(u => u.Id);
+		// Указываем первичный ключ
+		builder.HasKey(u => u.Id);
 
-				builder.Property(u => u.FirstName)
-						.IsRequired()
-						.HasMaxLength(64);
+		builder.Property(u => u.FirstName)
+				.IsRequired()
+				.HasMaxLength(64);
 
-				builder.Property(u => u.FirstName)
-										.IsRequired()
-										.HasMaxLength(64);
+		builder.Property(u => u.LastName)
+								.IsRequired()
+								.HasMaxLength(64);
 
-				builder.Property(u => u.Email)
-						.IsRequired()
-						.HasMaxLength(64);		
-    }
+		builder.Property(u => u.Email)
+				.IsRequired()
+				.HasMaxLength(64);
+
+		builder.Property(u => u.RefreshToken)
+				.IsRequired(false)
+				.HasMaxLength(256);
+
+		builder.Property(u => u.RefreshTokenExpiryTime)
+				.IsRequired(false);
+	}
 }

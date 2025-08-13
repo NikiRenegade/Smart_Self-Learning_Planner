@@ -1,6 +1,6 @@
 using System;
 
-namespace SmartLearningPlanner.MobileApp.Model;
+namespace SmartLearningPlanner.MobileApp.Models;
 
 public class RegisterUserDto
 {
