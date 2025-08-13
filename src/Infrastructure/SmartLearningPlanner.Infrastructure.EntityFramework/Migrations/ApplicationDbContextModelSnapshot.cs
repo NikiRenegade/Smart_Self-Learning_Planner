@@ -207,7 +207,8 @@ namespace SmartLearningPlanner.Infrastructure.EntityFramework.Migrations
 
                     b.Property<string>("LastName")
                         .IsRequired()
-                        .HasColumnType("text");
+                        .HasMaxLength(64)
+                        .HasColumnType("character varying(64)");
 
                     b.Property<bool>("LockoutEnabled")
                         .HasColumnType("boolean");
@@ -231,6 +232,13 @@ namespace SmartLearningPlanner.Infrastructure.EntityFramework.Migrations
 
                     b.Property<bool>("PhoneNumberConfirmed")
                         .HasColumnType("boolean");
+
+                    b.Property<string>("RefreshToken")
+                        .HasMaxLength(256)
+                        .HasColumnType("character varying(256)");
+
+                    b.Property<DateTime?>("RefreshTokenExpiryTime")
+                        .HasColumnType("timestamp with time zone");
 
                     b.Property<string>("SecurityStamp")
                         .HasColumnType("text");
@@ -265,9 +273,6 @@ namespace SmartLearningPlanner.Infrastructure.EntityFramework.Migrations
                     b.Property<int>("ChildId")
                         .HasColumnType("integer");
 
-                    b.Property<int?>("MindmapNodeId")
-                        .HasColumnType("integer");
-
                     b.Property<int>("Order")
                         .HasColumnType("integer");
 
@@ -277,8 +282,6 @@ namespace SmartLearningPlanner.Infrastructure.EntityFramework.Migrations
                     b.HasKey("Id");
 
                     b.HasIndex("ChildId");
-
-                    b.HasIndex("MindmapNodeId");
 
                     b.HasIndex("ParentId");
 
@@ -558,12 +561,8 @@ namespace SmartLearningPlanner.Infrastructure.EntityFramework.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("SmartLearningPlanner.Domain.Entities.MindmapNode", null)
-                        .WithMany("Parents")
-                        .HasForeignKey("MindmapNodeId");
-
                     b.HasOne("SmartLearningPlanner.Domain.Entities.MindmapNode", "Parent")
-                        .WithMany()
+                        .WithMany("MindmapEdges")
                         .HasForeignKey("ParentId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -634,9 +633,9 @@ namespace SmartLearningPlanner.Infrastructure.EntityFramework.Migrations
 
             modelBuilder.Entity("SmartLearningPlanner.Domain.Entities.MindmapNode", b =>
                 {
-                    b.Navigation("Missions");
+                    b.Navigation("MindmapEdges");
 
-                    b.Navigation("Parents");
+                    b.Navigation("Missions");
 
                     b.Navigation("Quizzes");
 

@@ -10,7 +10,9 @@
     <PropertyGroup Condition=" '$(RunConfiguration)' == 'https' " />
     <PropertyGroup Condition=" '$(RunConfiguration)' == 'http' " />
     <ItemGroup>
+        <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="8.0.5" />
         <PackageReference Include="Microsoft.AspNetCore.OpenApi" Version="8.0.13" />
+        <PackageReference Include="Microsoft.IdentityModel.Tokens" Version="8.13.0" />
         <PackageReference Include="Swashbuckle.AspNetCore" Version="6.0.0" />
         <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="8.0.13">
           <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
@@ -23,6 +25,7 @@
     </ItemGroup>
 
     <ItemGroup>
+      <ProjectReference Include="../../Infrastructure/Services/SmartLearningPlanner.Infrastructure.Services.csproj" />
       <ProjectReference Include="..\..\..\SmartLearningPlanner.Application\SmartLearningPlanner.Application.csproj">
         <ReferenceSourceTarget></ReferenceSourceTarget>
         <GlobalPropertiesToRemove></GlobalPropertiesToRemove>

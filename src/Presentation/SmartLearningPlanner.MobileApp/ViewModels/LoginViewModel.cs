@@ -1,7 +1,7 @@
 using System.Windows.Input;
 using CommunityToolkit.Mvvm.Input;
 using CommunityToolkit.Mvvm.ComponentModel;
-using SmartLearningPlanner.MobileApp.Views;
+using SmartLearningPlanner.MobileApp.Views.Pages;
 using SmartLearningPlanner.MobileApp.Services;
 namespace SmartLearningPlanner.MobileApp.ViewModels;
 
@@ -62,8 +62,7 @@ public partial class LoginViewModel : ObservableObject
 		var success = await _authContext.LoginAsync();
 		if (success)
 		{
-			await Shell.Current.DisplayAlert("Успех", "Вы вошли в систему", "OK");
-			//await Shell.Current.GoToAsync("..");
+			Microsoft.Maui.Controls.Application.Current.MainPage = new AppShell();
 		}
 		else
 		{

@@ -1,4 +1,4 @@
-﻿using SmartLearningPlanner.MobileApp.Views;
+﻿using SmartLearningPlanner.MobileApp.Views.Pages;
 namespace SmartLearningPlanner.MobileApp;
 
 public partial class AppShell : Shell

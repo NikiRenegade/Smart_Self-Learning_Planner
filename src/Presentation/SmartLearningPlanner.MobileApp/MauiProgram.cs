@@ -12,14 +12,14 @@ public static class MauiProgram
 	public static MauiApp CreateMauiApp()
 	{
 		var builder = MauiApp.CreateBuilder();
-		      
-        builder
-			.UseMauiApp<App>()
-			.ConfigureFonts(fonts =>
-			{
-				fonts.AddFont("OpenSans-Regular.ttf", "OpenSansRegular");
-				fonts.AddFont("OpenSans-Semibold.ttf", "OpenSansSemibold");
-			});
+
+		builder
+	.UseMauiApp<App>()
+	.ConfigureFonts(fonts =>
+	{
+		fonts.AddFont("OpenSans-Regular.ttf", "OpenSansRegular");
+		fonts.AddFont("OpenSans-Semibold.ttf", "OpenSansSemibold");
+	});
 		builder.Services.AddSingleton(sp =>
 			 {
 				 return new HttpClient();
@@ -33,42 +33,43 @@ public static class MauiProgram
 		builder.Services.AddTransient<CredentialAuthStrategyService>();
 		builder.Services.AddTransient<VkAuthStrategyService>();
 		builder.Services.AddTransient<YandexAuthStrategyService>();
+		builder.Services.AddSingleton<ITokenService, TokenService>();
 		builder.Services.AddSingleton(new ApiOptions
 		{
 			BaseUrl = "http://127.0.0.1:5188/api"
 		});
 
-		#if DEBUG
+#if DEBUG
 		builder.Logging.AddDebug();
-        #endif
+#endif
 
-        // Register HttpClient
-        string BaseUrl = DeviceInfo.Platform == DevicePlatform.Android
-                                    ? "http://10.0.2.2:5188/api/"
-                                    : "http://localhost:5188/api/";
-        builder.Services.AddHttpClient<IRoadmapService, RoadmapService>(client =>
-        {
-            client.BaseAddress = new Uri(BaseUrl);
-        });
+		// Register HttpClient
+		string BaseUrl = DeviceInfo.Platform == DevicePlatform.Android
+																? "http://192.168.1.100:5188/api/"
+																: "http://localhost:5188/api/";
+		builder.Services.AddTransient<JwtAuthHandler>();
+		builder.Services.AddHttpClient<IRoadmapService, RoadmapService>(client =>
+		{
+			client.BaseAddress = new Uri(BaseUrl);
+			// Добавлять токен будет DelegatingHandler (см. ниже)
+		})
+.AddHttpMessageHandler<JwtAuthHandler>();
 
-        // Register services
-        builder.Services.AddSingleton<IRoadmapService, RoadmapService>();
+		// Register services
+		builder.Services.AddSingleton<IRoadmapService, RoadmapService>();
 
-        builder.Services.AddTransient<CreateRoadmapViewModel>();
-        builder.Services.AddTransient<CreateRoadmapPage>();
+		builder.Services.AddTransient<CreateRoadmapViewModel>();
+		builder.Services.AddTransient<CreateRoadmapPage>();
 
-        // Регистрация ViewModel и страницы
-        builder.Services.AddSingleton<RoadmapListViewModel>();
-        builder.Services.AddSingleton<MyRoadmapsPage>();
+		// Регистрация ViewModel и страницы
+		builder.Services.AddSingleton<RoadmapListViewModel>();
+		builder.Services.AddSingleton<MyRoadmapsPage>();
 
-        //builder.Services.AddTransient<RoadmapDetailViewModel>();
+		//builder.Services.AddTransient<RoadmapDetailViewModel>();
 
-        builder.Services.AddSingleton<RoadmapViewModel>();
-        builder.Services.AddTransient<RoadmapViewerPage>();
+		builder.Services.AddSingleton<RoadmapViewModel>();
+		builder.Services.AddTransient<RoadmapViewerPage>();
 
-        return builder.Build();
+		return builder.Build();
 	}
 }
-
-
-        

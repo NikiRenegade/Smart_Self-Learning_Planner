@@ -4,7 +4,7 @@ namespace SmartLearningPlanner.MobileApp.Services;
 
 public class AuthContext
 {
-	private IAuthStrategyService _strategy;
+	private IAuthStrategyService? _strategy;
 	public void SetStrategy(IAuthStrategyService strategy)
 	{
 		_strategy = strategy;

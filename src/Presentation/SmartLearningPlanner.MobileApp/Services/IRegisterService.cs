@@ -1,5 +1,5 @@
 using System;
-using SmartLearningPlanner.MobileApp.Model;
+using SmartLearningPlanner.MobileApp.Models;
 namespace SmartLearningPlanner.MobileApp.Services;
 
 public interface IRegisterService
