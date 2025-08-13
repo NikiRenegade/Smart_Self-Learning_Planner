@@ -1,0 +1,46 @@
+﻿<?xml version="1.0" encoding="UTF-8" ?>
+<Shell
+    x:Class="SmartLearningPlanner.MobileApp.AppShell"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:page="clr-namespace:SmartLearningPlanner.MobileApp.Views.Pages"
+    Shell.FlyoutBehavior="Disabled"
+    Title="SmartLearningPlanner.MobileApp">
+
+    <TabBar>
+        <ShellContent
+            Icon="home.png"
+            ContentTemplate="{DataTemplate page:HomePage}"
+            Route="MainPage"/>
+        <ShellContent
+            Icon="mymaps1n.png"
+            ContentTemplate="{DataTemplate page:MyRoadmapsPage}"
+            Route="MyRoadmaps"/>
+        <ShellContent
+            Icon="search.png"
+            ContentTemplate="{DataTemplate page:SearchRoadmapsPage}"
+            Route="SearchRoadmaps"/>
+
+        <ShellContent
+            Icon="profile.png"
+            ContentTemplate="{DataTemplate local:LoginPage}"
+            Route="LoginPage"/>
+
+
+        <!-- <ShellContent
+            Icon="profile.png"
+            ContentTemplate="{DataTemplate page:ProfilePage}"
+            Route="Profile"
+        />
+        -->
+
+        <!-- <ShellContent
+             Title="RoadmapViewerPage"
+            
+             Icon="my-maps_2.png"
+             ContentTemplate="{DataTemplate page:RoadmapViewerPage}"
+     
+            /> -->
+    </TabBar>
+</Shell>
+
