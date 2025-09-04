@@ -2,13 +2,13 @@ using System.Windows.Input;
 using CommunityToolkit.Mvvm.Input;
 using CommunityToolkit.Mvvm.ComponentModel;
 using SmartLearningPlanner.MobileApp.Views.Pages;
-using SmartLearningPlanner.MobileApp.Services;
+using SmartLearningPlanner.MobileApp.Services.Auth;
+using SmartLearningPlanner.MobileApp.Services.Auth.Strategies;
 namespace SmartLearningPlanner.MobileApp.ViewModels;
 
 public partial class LoginViewModel : ObservableObject
 {
 	private readonly AuthContext _authContext;
-	private readonly HttpClient _httpClient;
 	private readonly IServiceProvider _serviceProvider;
 
 	[ObservableProperty]
@@ -22,10 +22,9 @@ public partial class LoginViewModel : ObservableObject
 	public ICommand VkLoginCommand { get; }
 	public ICommand YandexLoginCommand { get; }
 
-	public LoginViewModel(AuthContext authContext, HttpClient httpClient, IServiceProvider serviceProvider)
+	public LoginViewModel(AuthContext authContext, IServiceProvider serviceProvider)
 	{
 		_authContext = authContext;
-		_httpClient = httpClient;
 		_serviceProvider = serviceProvider;
 		NavigateToRegisterCommand = new RelayCommand(OnNavigateToRegister);
 		LoginCommand = new AsyncRelayCommand(LoginWithCredentialsAsync);

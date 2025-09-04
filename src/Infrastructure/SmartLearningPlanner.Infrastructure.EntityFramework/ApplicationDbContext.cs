@@ -5,13 +5,13 @@ using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 namespace SmartLearningPlanner.Infrastructure.EntityFramework;
 
 // TODO: postgresql
-public class ApplicationDbContext: IdentityDbContext<ApplicationUser>
+public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
 {
     public DbSet<Tag> Tags => Set<Tag>();
 
-    public DbSet<AnswerOption> AnswerOptions => Set<AnswerOption>();
+    public DbSet<QuizQuestionAnswerOption> AnswerOptions => Set<QuizQuestionAnswerOption>();
 
-    public DbSet<Quiz> Quizs => Set<Quiz>();
+    public DbSet<Quiz> Quizzes => Set<Quiz>();
 
     public DbSet<QuizQuestion> QuizQuestions => Set<QuizQuestion>();
 
@@ -23,11 +23,13 @@ public class ApplicationDbContext: IdentityDbContext<ApplicationUser>
 
     public DbSet<Mission> Missions => Set<Mission>();
 
-    
+    public DbSet<QuizQuestionType> QuizQuestionTypes => Set<QuizQuestionType>();
+
+
     public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : base(options)
     {
     }
- 
+
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
         base.OnModelCreating(modelBuilder);

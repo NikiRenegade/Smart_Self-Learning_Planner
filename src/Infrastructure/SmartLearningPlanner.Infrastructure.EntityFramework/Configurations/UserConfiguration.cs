@@ -33,5 +33,10 @@ public class UserConfiguration : IEntityTypeConfiguration<ApplicationUser>
 
 		builder.Property(u => u.RefreshTokenExpiryTime)
 				.IsRequired(false);
+
+		builder.HasMany(u => u.CreatedQuizzes)
+				.WithOne(q => q.CreatedBy)
+				.HasForeignKey(q => q.CreatedById)
+				.OnDelete(DeleteBehavior.SetNull); // Удаление квиза не приводит к удалению пользователя
 	}
 }

@@ -72,11 +72,13 @@ public class AuthController : ControllerBase
 
 		var accessToken = await _jwtTokenService.GenerateJwtToken(loginDto.Email);
 		var refreshToken = await _authService.UpdateRefreshTokenAsync(loginDto.Email);
+		var userProfile = await _authService.GetUserProfileAsync(loginDto.Email);
 
 		return Ok(new
 		{
 			AccessToken = accessToken,
-			RefreshToken = refreshToken
+			RefreshToken = refreshToken,
+			UserProfile = userProfile
 		});
 	}
 
@@ -99,16 +101,13 @@ public class AuthController : ControllerBase
 
 		var accessToken = await _jwtTokenService.GenerateJwtToken(refreshTokenDto.Email);
 		var refreshToken = await _authService.UpdateRefreshTokenAsync(refreshTokenDto.Email);
+		var userProfile = await _authService.GetUserProfileAsync(refreshTokenDto.Email);
 
 		return Ok(new
 		{
 			AccessToken = accessToken,
-			RefreshToken = refreshToken
+			RefreshToken = refreshToken,
+			UserProfile = userProfile
 		});
 	}
-
-
-
-
-
 }

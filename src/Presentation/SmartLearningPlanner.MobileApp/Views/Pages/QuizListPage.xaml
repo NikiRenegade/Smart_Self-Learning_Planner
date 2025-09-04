@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="SmartLearningPlanner.MobileApp.Views.Pages.QuizListPage"
+             xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
+             Title="QuizListPage">
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Text="Создать квиз"
+                     Order="Primary"
+                     Priority="0"
+                     Command="{Binding CreateQuizCommand}"/>
+    </ContentPage.ToolbarItems>
+    <ScrollView>
+        <VerticalStackLayout Padding="20"
+                             Spacing="20">
+
+            <Label Text="Ваши квизы"
+                   FontSize="24"
+                   FontAttributes="Bold"/>
+
+            <CollectionView ItemsSource="{Binding MyQuizzes}"
+                            SelectionMode="Single"
+                            SelectedItem="{Binding SelectedMyQuiz, Mode=TwoWay}"
+                            SelectionChangedCommand="{Binding OpenQuizCommand}"
+                            SelectionChangedCommandParameter="{Binding SelectedItem, Source={RelativeSource Self}}">
+                <CollectionView.ItemsLayout>
+                    <LinearItemsLayout Orientation="Vertical"
+                                       ItemSpacing="5"/>
+                </CollectionView.ItemsLayout>
+
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+                        <Frame Padding="10"
+                               Margin="5"
+                               BorderColor="LightGray"
+                               CornerRadius="10"
+                               HasShadow="True">
+                            <VerticalStackLayout>
+                                <Label Text="{Binding Title}"
+                                       FontSize="18"
+                                       FontAttributes="Bold"/>
+                                <Label Text="{Binding Description}"
+                                       FontSize="14"
+                                       TextColor="Gray"/>
+                            </VerticalStackLayout>
+                        </Frame>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+
+            <Label Text="Другие квизы"
+                   FontSize="24"
+                   FontAttributes="Bold"/>
+
+            <CollectionView ItemsSource="{Binding OtherQuizzes}"
+                            SelectionMode="Single"
+                            SelectedItem="{Binding SelectedOtherQuiz, Mode=TwoWay}"
+                            SelectionChangedCommand="{Binding OpenQuizCommand}"
+                            SelectionChangedCommandParameter="{Binding SelectedItem, Source={RelativeSource Self}}">
+                <CollectionView.ItemsLayout>
+                    <LinearItemsLayout Orientation="Vertical"
+                                       ItemSpacing="5"/>
+                </CollectionView.ItemsLayout>
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+                        <Frame Padding="10"
+                               BorderColor="LightGray"
+                               CornerRadius="10"
+                               HasShadow="True">
+                            <VerticalStackLayout>
+                                <Label Text="{Binding Title}"
+                                       FontSize="18"
+                                       FontAttributes="Bold"/>
+                                <Label FontSize="12"
+                                       TextColor="DarkGray">
+                                    <Label.Text>
+                                        <MultiBinding StringFormat="Автор: {0}">
+                                            <Binding Path="CreatedByUserName"/>
+                                        </MultiBinding>
+                                    </Label.Text>
+                                </Label>
+
+                                <Label Text="{Binding Description}"
+                                       FontSize="14"
+                                       TextColor="Gray"/>
+
+                            </VerticalStackLayout>
+                        </Frame>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+
+        </VerticalStackLayout>
+    </ScrollView>
+</ContentPage>

@@ -27,12 +27,15 @@ builder.Services.AddScoped<ITagRepository, TagRepository>();
 builder.Services.AddScoped<IUserRepository, UserRepository>();
 builder.Services.AddScoped<IRoadmapRepository, RoadmapRepository>();
 builder.Services.AddScoped<IAuthRepository, AuthRepository>();
-
+builder.Services.AddScoped<IQuizQuestionTypeRepository, QuizQuestionTypeRepository>();
+builder.Services.AddScoped<IQuizRepository, QuizRepository>();
 builder.Services.AddScoped<ITagService, TagService>();
 builder.Services.AddScoped<IUserService, UserService>();
 builder.Services.AddScoped<IRoadmapService, RoadmapService>();
 builder.Services.AddScoped<IJwtTokenService, jwtTokenService>();
 builder.Services.AddScoped<IAuthService, AuthService>();
+builder.Services.AddScoped<IQuizQuestionTypeService, QuizQuestionTypeService>();
+builder.Services.AddScoped<IQuizService, QuizService>();
 // Регистрация ApplicationDbContext
 builder.Services.AddDbContext<ApplicationDbContext>(options =>
 		options.UseNpgsql(builder.Configuration.GetConnectionString("DefaultConnection")));

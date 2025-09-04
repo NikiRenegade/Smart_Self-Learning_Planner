@@ -1,6 +1,4 @@
-﻿using Microsoft.Maui.Storage;
-using SmartLearningPlanner.MobileApp.Services;
-using SmartLearningPlanner.MobileApp.Views;
+﻿using SmartLearningPlanner.MobileApp.Services.Auth.Interfaces;
 
 namespace SmartLearningPlanner.MobileApp;
 
@@ -11,11 +9,11 @@ public partial class App : Application
 	{
 		InitializeComponent();
 	}
-	private readonly ITokenService _tokenService;
-	public App(ITokenService tokenService)
+	private readonly IUserSessionService _userSessionService;
+	public App(IUserSessionService userSessionService)
 	{
 		InitializeComponent();
-		_tokenService = tokenService;
+		_userSessionService = userSessionService;
 
 		MainPage = new ContentPage();
 
@@ -25,11 +23,12 @@ public partial class App : Application
 
 	try
 	{
-		isValid = await _tokenService.ValidateAccessTokenServerAsync();
+		isValid = await _userSessionService.ValidateAccessTokenServerAsync();
+		isValid = false;
 
 		if (!isValid)
 		{
-			isValid = await _tokenService.ValidateRefreshTokenServerAsync();
+			isValid = await _userSessionService.ValidateRefreshTokenServerAsync();
 		}
 	}
 	catch (Exception ex)
