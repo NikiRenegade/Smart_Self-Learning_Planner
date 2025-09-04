@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             x:Name="ThisPage"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="SmartLearningPlanner.MobileApp.Views.Pages.QuizEditPage"
+             xmlns:controls="clr-namespace:SmartLearningPlanner.MobileApp.Controls"
+             xmlns:viewModels="clr-namespace:SmartLearningPlanner.MobileApp.ViewModels"
+             xmlns:templates="clr-namespace:SmartLearningPlanner.MobileApp.Views.Templates"
+             Title="QuizEditPage">
+
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <templates:QuizQuestionTextAnswerTemplate/>
+                <templates:QuizQuestionMultipleChoiceTemplate/>
+                <templates:QuizQuestionSingleChoiceTemplate/>
+            </ResourceDictionary.MergedDictionaries>
+
+            <templates:QuizQuestionTemplateSelector
+                x:Key="QuizQuestionTemplateSelector"
+                QuizQuestionTextAnswerTemplate="{StaticResource QuizQuestionTextAnswerTemplate}"
+                QuizQuestionMultipleChoiceTemplate="{StaticResource QuizQuestionMultipleChoiceTemplate}"
+                QuizQuestionSingleChoiceTemplate="{StaticResource QuizQuestionSingleChoiceTemplate}"/>
+        </ResourceDictionary>
+    </ContentPage.Resources>
+    <ScrollView>
+        <VerticalStackLayout Padding="20"
+                             Spacing="15">
+
+            <!-- Заголовок -->
+            <Entry Placeholder="Название квиза"
+                   Text="{Binding Quiz.Title}"/>
+
+            <Editor Placeholder="Описание квиза"
+                    HeightRequest="80"
+                    Text="{Binding Quiz.Description}"/>
+
+            <!-- Выбор типа вопроса -->
+            <Picker Title="Тип вопроса"
+                    ItemsSource="{Binding AvailableQuestionTypes}"
+                    ItemDisplayBinding="{Binding Name}"
+                    SelectedItem="{Binding SelectedQuestionType}"/>
+
+            <!-- Кнопка добавления -->
+            <Button Text="Добавить вопрос"
+                    Command="{Binding AddQuestionCommand}"/>
+            <Button Text="Сохранить квиз"
+                    Command="{Binding SaveQuizCommand}"/>
+
+            <CollectionView ItemsSource="{Binding Quiz.QuizQuestions}"
+                            ItemTemplate="{StaticResource QuizQuestionTemplateSelector}">
+                <CollectionView.ItemsLayout>
+                    <LinearItemsLayout Orientation="Vertical"
+                                       ItemSpacing="5"/>
+                </CollectionView.ItemsLayout>
+
+            </CollectionView>
+
+            <!-- Сохранить -->
+
+        </VerticalStackLayout>
+    </ScrollView>
+</ContentPage>

@@ -26,6 +26,11 @@
             ContentTemplate="{DataTemplate page:LoginPage}"
             Route="LoginPage"/>
 
+        <ShellContent
+            Icon="profile.png"
+            ContentTemplate="{DataTemplate page:QuizListPage}"
+            Route="QuizListPage"/>
+
 
         <!-- <ShellContent
             Icon="profile.png"

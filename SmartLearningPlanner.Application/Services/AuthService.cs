@@ -31,7 +31,7 @@ public class AuthService : IAuthService
 				Email = registerUserDto.Email
 			};
 			var token = await _authRepository.RegisterAsync(user, registerUserDto.Password);
-			var confirmationLink = $"http://localhost:5188/api/users/confirm-email?id={user.Id}&token={Uri.EscapeDataString(token)}";
+			var confirmationLink = $"http://localhost:5188/api/auth/confirm-email?id={user.Id}&token={Uri.EscapeDataString(token)}";
 
 			var message = $"<p>Здравствуйте, {user.UserName}!</p><p>Подтвердите ваш аккаунт по ссылке ниже <br> <a href='{confirmationLink}'>Подтвердить аккаунт</a>.</p>";
 			await _emailSender.SendEmailAsync(user.Email, "Подтверждение аккаунта", message);
@@ -112,5 +112,20 @@ public class AuthService : IAuthService
 		var refreshToken = Guid.NewGuid().ToString();
 		await _authRepository.UpdateRefreshTokenAsync(user, refreshToken);
 		return refreshToken;
+	}
+
+	public async Task<UserProfileDto> GetUserProfileAsync(string email)
+	{
+		var user = await _userRepository.GetByEmailAsync(email);
+		if (user == null) throw new Exception("User not found");
+
+		return new UserProfileDto
+		{
+			Id = user.Id,
+			UserName = user.UserName,
+			FirstName = user.FirstName,
+			LastName = user.LastName,
+			Email = user.Email
+		};
 	}
 }

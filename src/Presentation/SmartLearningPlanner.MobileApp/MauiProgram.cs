@@ -1,9 +1,15 @@
 ﻿using Microsoft.Extensions.Logging;
 using SmartLearningPlanner.MobileApp.Services;
+using SmartLearningPlanner.MobileApp.Services.Auth;
+using SmartLearningPlanner.MobileApp.Services.Auth.Interfaces;
+using SmartLearningPlanner.MobileApp.Services.Auth.Strategies;
+using SmartLearningPlanner.MobileApp.Services.Quiz.Factories;
 using SmartLearningPlanner.MobileApp.ViewModels;
 using SmartLearningPlanner.MobileApp.Views;
 using SmartLearningPlanner.MobileApp.Options;
 using SmartLearningPlanner.MobileApp.Views.Pages;
+using SmartLearningPlanner.MobileApp.Services.Quiz;
+using CommunityToolkit.Maui;
 
 namespace SmartLearningPlanner.MobileApp;
 
@@ -15,6 +21,7 @@ public static class MauiProgram
 
 		builder
 	.UseMauiApp<App>()
+	.UseMauiCommunityToolkit()
 	.ConfigureFonts(fonts =>
 	{
 		fonts.AddFont("OpenSans-Regular.ttf", "OpenSansRegular");
@@ -33,11 +40,23 @@ public static class MauiProgram
 		builder.Services.AddTransient<CredentialAuthStrategyService>();
 		builder.Services.AddTransient<VkAuthStrategyService>();
 		builder.Services.AddTransient<YandexAuthStrategyService>();
-		builder.Services.AddSingleton<ITokenService, TokenService>();
+		builder.Services.AddSingleton<IUserSessionService, UserSessionService>();
+		builder.Services.AddTransient<QuizEditViewModel>();
+		builder.Services.AddTransient<QuizEditPage>();
+		builder.Services.AddTransient<QuizListViewModel>();
+		builder.Services.AddTransient<QuizListPage>();
+		builder.Services.AddSingleton<IQuestionFactory, SingleChoiceQuestionFactory>();
+		builder.Services.AddSingleton<IQuestionFactory, MultipleChoiceQuestionFactory>();
+		builder.Services.AddSingleton<IQuestionFactory, TextAnswerQuestionFactory>();
+		builder.Services.AddSingleton<QuestionFactoryRegistry>();
+		builder.Services.AddTransient<ApiClient>();
+		builder.Services.AddTransient<IQuizService, QuizService>();
+		builder.Services.AddTransient<IAuthApiClient, AuthApiClient>();
 		builder.Services.AddSingleton(new ApiOptions
 		{
 			BaseUrl = "http://127.0.0.1:5188/api"
 		});
+
 
 #if DEBUG
 		builder.Logging.AddDebug();

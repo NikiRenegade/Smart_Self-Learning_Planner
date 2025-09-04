@@ -5,7 +5,10 @@ namespace SmartLearningPlanner.Domain.Entities;
 /// </summary>
 public class QuizQuestion
 {
-    public int Id { get; set; }
+    /// <summary>
+    /// Идентификатор вопроса.
+    /// </summary>
+    public int? Id { get; set; }
 
     /// <summary>
     /// Текст вопроса.
@@ -13,27 +16,32 @@ public class QuizQuestion
     public string QuestionText { get; set; }
 
     /// <summary>
-    /// Тип вопроса (один вариант, несколько, текстовый ответ).
+    /// Идентификатор типа вопроса (одиночный выбор, множественный выбор, текстовый ответ).
     /// </summary>
-    public QuestionType Type { get; set; }
+    public int QuestionTypeId { get; set; }
+
+    /// <summary>
+    /// Тип вопроса (одиночный выбор, множественный выбор, текстовый ответ).
+    /// </summary>
+    public QuizQuestionType QuestionType { get; set; }
 
     /// <summary>
     /// Варианты ответа (если применимо).
     /// </summary>
-    public List<AnswerOption> Options { get; set; }
+    public List<QuizQuestionAnswerOption> QuizQuestionAnswerOptions { get; set; }
 
     /// <summary>
     /// Правильный ответ (если это текстовый вопрос).
     /// </summary>
     public string? CorrectAnswer { get; set; }
-}
 
-/// <summary>
-/// Типы вопросов.
-/// </summary>
-public enum QuestionType
-{
-    SingleChoice,  // Один правильный вариант
-    MultipleChoice, // Несколько правильных вариантов
-    TextAnswer     // Открытый вопрос
+    /// <summary>
+    /// Идентификатор квиза, к которому относится этот вопрос.
+    /// </summary>
+    public int QuizId { get; set; }
+
+    /// <summary>
+    /// Квиз, к которому относится этот вопрос.
+    /// </summary>
+    public Quiz Quiz { get; set; }
 }

@@ -8,4 +8,5 @@ public class ApplicationUser : IdentityUser
     public string LastName { get; set; }
     public string RefreshToken { get; set; }
     public DateTime? RefreshTokenExpiryTime { get; set; }
+    public List<Quiz> CreatedQuizzes { get; set; } = new();
 }

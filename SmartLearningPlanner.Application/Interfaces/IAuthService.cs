@@ -14,5 +14,6 @@ public interface IAuthService
 	Task<AccessTokenUserDto> GetAccessTokenUserDtoAsync(string email);
 	Task<string> UpdateRefreshTokenAsync(string email);
 	Task<RefreshTokenUserDto> GetRefreshTokenUserDtoAsync(string refreshToken);
+	Task<UserProfileDto> GetUserProfileAsync(string email);
 
 }

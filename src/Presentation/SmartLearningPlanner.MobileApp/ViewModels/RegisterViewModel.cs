@@ -1,7 +1,7 @@
 using System.Windows.Input;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
-using SmartLearningPlanner.MobileApp.Services;
+using SmartLearningPlanner.MobileApp.Services.Auth.Interfaces;
 namespace SmartLearningPlanner.MobileApp.ViewModels;
 
 public partial class RegisterViewModel : ObservableObject
@@ -46,4 +46,4 @@ public partial class RegisterViewModel : ObservableObject
 		}
 	}
 }
-	
+
